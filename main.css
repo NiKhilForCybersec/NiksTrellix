@@ -142,7 +142,7 @@ body::after {
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--trellix-primary), transparent);
-    animation: scanline 8s linear infinite;
+    
     pointer-events: none;
     z-index: 1000;
     opacity: 0.5;
