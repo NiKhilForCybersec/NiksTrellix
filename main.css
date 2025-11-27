@@ -200,7 +200,6 @@ p {
 a {
     color: var(--trellix-primary);
     text-decoration: none;
-    transition: color var(--transition-fast);
 }
 
 a:hover {
