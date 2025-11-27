@@ -270,7 +270,7 @@ code {
     letter-spacing: 1px;
     font-size: 0.9rem;
     color: var(--text-secondary);
-    transition: color var(--transition-fast);
+    
 }
 
 .header-nav a:hover,
