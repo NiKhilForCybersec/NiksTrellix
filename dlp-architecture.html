@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trellix DLP Architecture - Data Loss Prevention for endpoints, network, and discovery.">
+    <title>DLP Architecture - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html" class="active">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Data Loss Prevention</div>
+            <ul class="sidebar-nav">
+                <li><a href="dlp-fundamentals.html" data-category="dlp">DLP Fundamentals</a></li>
+                <li><a href="dlp-architecture.html" data-category="dlp" class="active">DLP Architecture</a></li>
+                <li><a href="dlp-policies.html" data-category="dlp">Policy Configuration</a></li>
+                <li><a href="dlp-deployment.html" data-category="dlp">Deployment Guide</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">On This Page</div>
+            <ul class="sidebar-nav">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#components">DLP Components</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#endpoint">Endpoint DLP</a></li>
+                <li><a href="#network">Network DLP</a></li>
+                <li><a href="#discover">DLP Discover</a></li>
+                <li><a href="#classification">Data Classification</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="dlp-fundamentals.html">DLP</a>
+                    <span class="separator">/</span>
+                    <span>Architecture</span>
+                </div>
+                <h1>Trellix DLP Architecture</h1>
+                <p class="hero-subtitle">
+                    Comprehensive data protection across endpoints, network, and storage. 
+                    Prevent data exfiltration with content-aware policies and advanced classification.
+                </p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge dlp">DLP</span></span>
+                    <span class="page-meta-item">📖 25 min read</span>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>What is Trellix DLP?</h2>
+                
+                <p>
+                    <strong>Trellix Data Loss Prevention (DLP)</strong> protects sensitive data from unauthorized 
+                    disclosure across endpoints, network, and storage systems. DLP provides content inspection, 
+                    data classification, and policy enforcement to prevent accidental or malicious data leakage.
+                </p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Your Current Project</div>
+                        <p>This documentation is particularly relevant to your Purview DLP migration project at Siemens. Understanding Trellix DLP architecture helps with policy translation and deployment planning when migrating from Symantec DLP.</p>
+                    </div>
+                </div>
+
+                <h3>DLP Product Family</h3>
+                
+                <div class="product-grid">
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">💻</div>
+                            <h4 class="card-title">DLP Endpoint</h4>
+                        </div>
+                        <p>Protects data on endpoints including removable media, cloud uploads, email clients, and printing.</p>
+                        <span class="version-tag">Managed via ePO</span>
+                    </div>
+                    
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <h4 class="card-title">DLP Network</h4>
+                        </div>
+                        <p>Monitors and blocks data in motion across network channels. Includes Prevent (blocking) and Monitor (detection) modes.</p>
+                        <span class="version-tag">Appliance-based</span>
+                    </div>
+                    
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">🔍</div>
+                            <h4 class="card-title">DLP Discover</h4>
+                        </div>
+                        <p>Scans file servers, databases, and cloud storage to find and classify sensitive data at rest.</p>
+                        <span class="version-tag">Scanner-based</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Components Section -->
+            <section id="components">
+                <h2>DLP Components</h2>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Function</th>
+                                <th>Deployment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ePO Server</strong></td>
+                                <td>Central management, policy distribution, incident management</td>
+                                <td>Required (existing ePO)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DLP Extension</strong></td>
+                                <td>ePO extension for DLP policy and incident management</td>
+                                <td>ePO Extension</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DLP Endpoint Agent</strong></td>
+                                <td>Endpoint data protection and policy enforcement</td>
+                                <td>Endpoint software</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DLP Prevent</strong></td>
+                                <td>Network email/web gateway integration for blocking</td>
+                                <td>Appliance/VM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DLP Monitor</strong></td>
+                                <td>Network TAP/SPAN port monitoring for detection</td>
+                                <td>Appliance/VM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DLP Discover</strong></td>
+                                <td>Data discovery scanning for files, databases, cloud</td>
+                                <td>Server software</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Evidence Server</strong></td>
+                                <td>Stores copies of detected sensitive content for review</td>
+                                <td>File server</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture">
+                <h2>DLP Architecture Overview</h2>
+
+                <div class="ascii-diagram dlp">
+<pre>
+TRELLIX DLP ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    ePO SERVER                                            │
+│                                                                                          │
+│   ┌───────────────────────────────────────────────────────────────────────────────────┐ │
+│   │                           DLP MANAGEMENT EXTENSION                                 │ │
+│   │                                                                                    │ │
+│   │   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐                   │ │
+│   │   │  Policy         │  │  Classification │  │  Incident       │                   │ │
+│   │   │  Management     │  │  Management     │  │  Management     │                   │ │
+│   │   │                 │  │                 │  │                 │                   │ │
+│   │   │ • Data Policies │  │ • Definitions   │  │ • Case Workflow │                   │ │
+│   │   │ • Rules         │  │ • Fingerprints  │  │ • Evidence View │                   │ │
+│   │   │ • Reactions     │  │ • Dictionaries  │  │ • Reporting     │                   │ │
+│   │   │ • Exceptions    │  │ • RegEx         │  │ • Analytics     │                   │ │
+│   │   └─────────────────┘  └─────────────────┘  └─────────────────┘                   │ │
+│   │                                                                                    │ │
+│   │   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐                   │ │
+│   │   │  Device         │  │  Evidence       │  │  User           │                   │ │
+│   │   │  Control        │  │  Management     │  │  Management     │                   │ │
+│   │   └─────────────────┘  └─────────────────┘  └─────────────────┘                   │ │
+│   │                                                                                    │ │
+│   └───────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                          │
+└──────────────────────────────────┬───────────────────────────────────────────────────────┘
+                                   │
+         ┌─────────────────────────┼─────────────────────────┐
+         │                         │                         │
+         ▼                         ▼                         ▼
+┌─────────────────────┐  ┌─────────────────────┐  ┌─────────────────────┐
+│   DLP ENDPOINT      │  │   DLP NETWORK       │  │   DLP DISCOVER      │
+│                     │  │                     │  │                     │
+│  ┌───────────────┐  │  │  ┌───────────────┐  │  │  ┌───────────────┐  │
+│  │  Data in Use  │  │  │  │ DLP PREVENT   │  │  │  │  File Server  │  │
+│  │               │  │  │  │               │  │  │  │  Scanner      │  │
+│  │ • USB/Media   │  │  │  │ • Email GW    │  │  │  └───────────────┘  │
+│  │ • Cloud Upload│  │  │  │ • Web Proxy   │  │  │  ┌───────────────┐  │
+│  │ • Print       │  │  │  │ • ICAP        │  │  │  │  Database     │  │
+│  │ • Email       │  │  │  │               │  │  │  │  Scanner      │  │
+│  │ • Clipboard   │  │  │  └───────────────┘  │  │  └───────────────┘  │
+│  │ • Screenshot  │  │  │                     │  │  ┌───────────────┐  │
+│  └───────────────┘  │  │  ┌───────────────┐  │  │  │  Cloud        │  │
+│                     │  │  │ DLP MONITOR   │  │  │  │  Scanner      │  │
+│  ┌───────────────┐  │  │  │               │  │  │  │               │  │
+│  │  Device Ctrl  │  │  │  │ • TAP/SPAN    │  │  │  │ • O365        │  │
+│  │               │  │  │  │ • Detection   │  │  │  │ • Box         │  │
+│  │ • USB Block   │  │  │  │ • Forensics   │  │  │  │ • SharePoint  │  │
+│  │ • Bluetooth   │  │  │  │               │  │  │  └───────────────┘  │
+│  │ • CD/DVD      │  │  │  └───────────────┘  │  │                     │
+│  └───────────────┘  │  │                     │  │                     │
+│                     │  │                     │  │                     │
+│  [Managed via MA]   │  │  [Appliance/VM]     │  │  [Server/Cloud]     │
+└─────────────────────┘  └─────────────────────┘  └─────────────────────┘
+         │                         │                         │
+         │                         │                         │
+         └─────────────────────────┼─────────────────────────┘
+                                   │
+                                   ▼
+                    ┌──────────────────────────────┐
+                    │       EVIDENCE SERVER        │
+                    │                              │
+                    │  • Incident evidence copies  │
+                    │  • Forensic retention        │
+                    │  • Compliance audit trail    │
+                    │                              │
+                    │  Storage: ~50GB per 10K      │
+                    │  endpoints with 90-day       │
+                    │  retention                   │
+                    └──────────────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <!-- Endpoint DLP Section -->
+            <section id="endpoint">
+                <h2>DLP Endpoint</h2>
+                
+                <p>
+                    DLP Endpoint protects sensitive data on workstations and laptops by monitoring 
+                    and controlling data movement through various channels.
+                </p>
+
+                <h3>Protected Channels</h3>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Channel</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Removable Storage</strong></td>
+                                <td>USB drives, external HDD, SD cards</td>
+                                <td>Block, Encrypt, Monitor, Justify</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cloud Services</strong></td>
+                                <td>Dropbox, OneDrive, Google Drive, Box</td>
+                                <td>Block, Monitor, Justify</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email Clients</strong></td>
+                                <td>Outlook, Thunderbird, webmail</td>
+                                <td>Block, Encrypt, Monitor, Justify</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Web Upload</strong></td>
+                                <td>HTTP/HTTPS file uploads</td>
+                                <td>Block, Monitor</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Printing</strong></td>
+                                <td>Local and network printing</td>
+                                <td>Block, Monitor, Watermark</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clipboard</strong></td>
+                                <td>Copy/paste between applications</td>
+                                <td>Block, Monitor</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Screen Capture</strong></td>
+                                <td>Screenshots, screen recording</td>
+                                <td>Block, Monitor</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Network Share</strong></td>
+                                <td>File copy to network locations</td>
+                                <td>Block, Monitor, Justify</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Device Control</h3>
+                
+                <p>
+                    In addition to content-aware protection, DLP Endpoint provides device control 
+                    to manage physical devices independently of content.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Device Control Options</span>
+                    </div>
+<pre>Device Classes:
+├── Storage Devices
+│   ├── USB Mass Storage
+│   ├── External Hard Drives
+│   ├── CD/DVD Drives
+│   └── SD Card Readers
+├── Communication Devices
+│   ├── Bluetooth
+│   ├── WiFi (Portable Hotspots)
+│   └── Infrared
+├── Imaging Devices
+│   ├── Cameras
+│   └── Scanners
+└── Other Devices
+    ├── Printers
+    ├── Modems
+    └── Smartphones (MTP/PTP)
+
+Control Modes:
+├── Allow (Full access)
+├── Block (No access)
+├── Read-Only (USB drives)
+└── Specific Device Allow (by serial/VID/PID)</pre>
+                </div>
+            </section>
+
+            <!-- Network DLP Section -->
+            <section id="network">
+                <h2>DLP Network</h2>
+                
+                <p>
+                    Network DLP monitors and protects data as it moves across network infrastructure.
+                </p>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="prevent">DLP Prevent</button>
+                        <button class="tab-button" data-tab="monitor">DLP Monitor</button>
+                    </div>
+                    
+                    <div class="tab-panel active" id="prevent">
+                        <div class="card">
+                            <h4>DLP Prevent</h4>
+                            <p>Inline deployment for active blocking of sensitive data transmission.</p>
+                            
+                            <h5>Integration Methods:</h5>
+                            <ul>
+                                <li><strong>Email Gateway (MTA)</strong> — SMTP inspection, block/encrypt/quarantine</li>
+                                <li><strong>Web Proxy (ICAP)</strong> — HTTP/HTTPS upload inspection</li>
+                                <li><strong>Exchange Integration</strong> — Native O365/Exchange integration</li>
+                            </ul>
+                            
+                            <h5>Deployment Architecture:</h5>
+                            <div class="ascii-diagram dlp">
+<pre>
+DLP PREVENT - EMAIL INTEGRATION
+═══════════════════════════════
+
+┌──────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│  Email   │───►│ Email Gateway│───►│ DLP Prevent  │───►│ Email Server │
+│  Client  │    │ (MTA)        │    │ (ICAP/SMTP)  │    │ (Exchange)   │
+└──────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+                                           │
+                                           │ Policy Match
+                                           ▼
+                                    ┌──────────────┐
+                                    │   Actions:   │
+                                    │ • Block      │
+                                    │ • Encrypt    │
+                                    │ • Quarantine │
+                                    │ • Notify     │
+                                    └──────────────┘
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="monitor">
+                        <div class="card">
+                            <h4>DLP Monitor</h4>
+                            <p>Passive deployment for detection and forensic capture without blocking.</p>
+                            
+                            <h5>Deployment:</h5>
+                            <ul>
+                                <li>Network TAP or SPAN port connection</li>
+                                <li>Passive inspection of all traffic</li>
+                                <li>Detection-only mode (no blocking)</li>
+                                <li>Full packet capture for forensics</li>
+                            </ul>
+                            
+                            <h5>Use Cases:</h5>
+                            <ul>
+                                <li>Policy tuning before enabling blocking</li>
+                                <li>Compliance monitoring and reporting</li>
+                                <li>Forensic investigation support</li>
+                                <li>Shadow IT detection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DLP Discover Section -->
+            <section id="discover">
+                <h2>DLP Discover</h2>
+                
+                <p>
+                    DLP Discover scans data repositories to find and classify sensitive data at rest.
+                </p>
+
+                <div class="card dlp">
+                    <h4>Supported Repositories</h4>
+                    <div class="grid grid-2">
+                        <div>
+                            <h5>On-Premises:</h5>
+                            <ul>
+                                <li>Windows File Servers (CIFS/SMB)</li>
+                                <li>SharePoint On-Premises</li>
+                                <li>SQL Server Databases</li>
+                                <li>Oracle Databases</li>
+                                <li>Exchange Mailboxes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5>Cloud:</h5>
+                            <ul>
+                                <li>Microsoft 365 (OneDrive, SharePoint)</li>
+                                <li>Box</li>
+                                <li>Google Drive</li>
+                                <li>AWS S3</li>
+                                <li>Azure Blob Storage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Discovery Workflow</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Define Scan Targets</div>
+                        <div class="step-content">Configure file servers, databases, or cloud repositories to scan. Set credentials and scope.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Apply Classification</div>
+                        <div class="step-content">Assign data classification definitions to identify sensitive content during scan.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Execute Scan</div>
+                        <div class="step-content">Run scheduled or on-demand scans. Can be incremental (new/modified files only).</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Review Results</div>
+                        <div class="step-content">View discovered sensitive data locations in ePO console. Generate reports.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Remediate</div>
+                        <div class="step-content">Apply remediation actions: move, encrypt, delete, or tag sensitive files.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Classification Section -->
+            <section id="classification">
+                <h2>Data Classification</h2>
+                
+                <p>
+                    Effective DLP relies on accurate data classification. Trellix DLP supports multiple 
+                    classification methods that can be combined for precise detection.
+                </p>
+
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <button class="accordion-header">
+                            <span>📝 Content Fingerprinting</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Register known sensitive documents to detect exact or partial matches.</p>
+                            <ul>
+                                <li><strong>Document Registration</strong> — Index specific sensitive documents</li>
+                                <li><strong>Partial Match</strong> — Detect extracts from registered documents</li>
+                                <li><strong>Database Fingerprinting</strong> — Protect structured data exports</li>
+                            </ul>
+                            <p><strong>Best For:</strong> Protecting specific high-value documents (contracts, M&A docs)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔤 Regular Expressions</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Pattern matching for structured data formats.</p>
+                            <div class="code-block">
+                                <div class="code-block-header">
+                                    <span class="code-block-title">Common Regex Patterns</span>
+                                </div>
+<pre># Credit Card Numbers (Luhn validated)
+\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})\b
+
+# Social Security Numbers
+\b\d{3}-\d{2}-\d{4}\b
+
+# Email Addresses
+\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+
+# Canadian Social Insurance Number
+\b\d{3}-\d{3}-\d{3}\b</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>📚 Dictionaries & Keywords</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Word and phrase lists for contextual detection.</p>
+                            <ul>
+                                <li><strong>Built-in Dictionaries</strong> — Medical terms, legal terms, profanity</li>
+                                <li><strong>Custom Dictionaries</strong> — Company-specific terminology</li>
+                                <li><strong>Keyword Proximity</strong> — Detect keywords near sensitive patterns</li>
+                            </ul>
+                            <p><strong>Best For:</strong> Industry-specific compliance (HIPAA medical terms)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🏷️ Document Properties</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Classify based on file metadata and properties.</p>
+                            <ul>
+                                <li><strong>File Type</strong> — Specific extensions or MIME types</li>
+                                <li><strong>File Size</strong> — Large file detection</li>
+                                <li><strong>Document Properties</strong> — Author, title, keywords</li>
+                                <li><strong>Classification Labels</strong> — Microsoft MIP/AIP labels</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🤖 Machine Learning</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>AI-based classification for complex content types.</p>
+                            <ul>
+                                <li><strong>Document Classification</strong> — Categorize by content type</li>
+                                <li><strong>Anomaly Detection</strong> — Unusual data movement patterns</li>
+                                <li><strong>Image Analysis</strong> — Detect sensitive images (IDs, checks)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Classification Best Practice</div>
+                        <p>Combine multiple classification methods for accuracy. Use fingerprinting for known documents, regex for structured data (SSN, credit cards), and keywords for context. Always validate with sample data before deployment.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Symantec Migration Note -->
+            <section>
+                <h2>Migration from Symantec DLP</h2>
+                
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Relevant to Your Project</div>
+                        <p>When migrating from Symantec DLP to Microsoft Purview (or another DLP solution), consider these mapping points between Symantec and Trellix DLP concepts:</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symantec DLP</th>
+                                <th>Trellix DLP Equivalent</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Enforce Server</td>
+                                <td>ePO + DLP Extension</td>
+                                <td>Central management platform</td>
+                            </tr>
+                            <tr>
+                                <td>Detection Server</td>
+                                <td>DLP Discover</td>
+                                <td>Data-at-rest scanning</td>
+                            </tr>
+                            <tr>
+                                <td>Network Prevent</td>
+                                <td>DLP Prevent</td>
+                                <td>Email/Web gateway integration</td>
+                            </tr>
+                            <tr>
+                                <td>Network Monitor</td>
+                                <td>DLP Monitor</td>
+                                <td>Passive network detection</td>
+                            </tr>
+                            <tr>
+                                <td>Endpoint Prevent</td>
+                                <td>DLP Endpoint</td>
+                                <td>Agent-based endpoint protection</td>
+                            </tr>
+                            <tr>
+                                <td>IDM (Indexed Document Matching)</td>
+                                <td>Content Fingerprinting</td>
+                                <td>Document registration</td>
+                            </tr>
+                            <tr>
+                                <td>EDM (Exact Data Matching)</td>
+                                <td>Database Fingerprinting</td>
+                                <td>Structured data protection</td>
+                            </tr>
+                            <tr>
+                                <td>DCM (Described Content)</td>
+                                <td>Classification Definitions</td>
+                                <td>Regex, keywords, dictionaries</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="edr-fundamentals.html" class="btn btn-ghost">← EDR Fundamentals</a>
+                <a href="troubleshooting.html" class="btn btn-primary">Troubleshooting →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

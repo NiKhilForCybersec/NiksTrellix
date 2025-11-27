@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trellix Endpoint Security (ENS) - Threat Prevention, Firewall, Web Control, and Adaptive Threat Protection.">
+    <title>Endpoint Security (ENS) - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html" class="active">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Endpoint Security</div>
+            <ul class="sidebar-nav">
+                <li><a href="endpoint-security.html" data-category="endpoint" class="active">ENS Fundamentals</a></li>
+                <li><a href="ens-architecture.html" data-category="endpoint">ENS Architecture</a></li>
+                <li><a href="ens-deployment.html" data-category="endpoint">Deployment Guide</a></li>
+                <li><a href="ens-policies.html" data-category="endpoint">Policy Configuration</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">On This Page</div>
+            <ul class="sidebar-nav">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#modules">ENS Modules</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#threat-prevention">Threat Prevention</a></li>
+                <li><a href="#firewall">Firewall</a></li>
+                <li><a href="#web-control">Web Control</a></li>
+                <li><a href="#atp">Adaptive Threat Protection</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Related Pages</div>
+            <ul class="sidebar-nav">
+                <li><a href="edr-fundamentals.html" data-category="endpoint">EDR Fundamentals</a></li>
+                <li><a href="epo-fundamentals.html" data-category="epo">ePO Management</a></li>
+                <li><a href="troubleshoot-endpoint.html" data-category="endpoint">ENS Troubleshooting</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="endpoint-security.html">Endpoint Security</a>
+                    <span class="separator">/</span>
+                    <span>Fundamentals</span>
+                </div>
+                <h1>Trellix Endpoint Security (ENS)</h1>
+                <p class="hero-subtitle">
+                    Next-generation endpoint protection platform with Threat Prevention, Firewall, 
+                    Web Control, and Adaptive Threat Protection modules.
+                </p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge endpoint">Endpoint</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                    <span class="page-meta-item">🔄 Updated: 2024</span>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>What is Trellix Endpoint Security?</h2>
+                
+                <p>
+                    <strong>Trellix Endpoint Security (ENS)</strong> is a comprehensive endpoint protection platform 
+                    that provides multi-layered defense against malware, exploits, and advanced threats. ENS evolved 
+                    from McAfee VirusScan Enterprise (VSE) and represents a complete architectural redesign with 
+                    modern threat detection capabilities.
+                </p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">ENS vs VSE</div>
+                        <p>ENS replaced VirusScan Enterprise (VSE) which reached end-of-life. ENS offers improved performance, better threat detection, and a modular architecture that allows selective deployment of protection features.</p>
+                    </div>
+                </div>
+
+                <h3>Product Evolution</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024 - Current</div>
+                        <div class="timeline-content">
+                            <h4>Trellix ENS 10.7.x</h4>
+                            <p>Trellix branding, enhanced cloud integration, improved ATP with machine learning, XDR telemetry support.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2023</div>
+                        <div class="timeline-content">
+                            <h4>McAfee ENS 10.7</h4>
+                            <p>Major release with Exploit Prevention, Real Protect cloud scanning, and improved AMSI integration.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2017 - 2020</div>
+                        <div class="timeline-content">
+                            <h4>McAfee ENS 10.5/10.6</h4>
+                            <p>Initial ENS releases replacing VSE, modular architecture introduced, Adaptive Threat Protection added.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Legacy</div>
+                        <div class="timeline-content">
+                            <h4>VirusScan Enterprise 8.8</h4>
+                            <p>Final VSE version, end-of-life December 2021. Organizations should migrate to ENS.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modules Section -->
+            <section id="modules">
+                <h2>ENS Modules</h2>
+                
+                <p>
+                    ENS uses a modular architecture allowing organizations to deploy only the protection 
+                    features they need. All modules are managed through ePO and share a common platform.
+                </p>
+
+                <div class="product-grid">
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🛡️</div>
+                            <h4 class="card-title">Threat Prevention</h4>
+                        </div>
+                        <p>Core anti-malware protection with on-access scanning, on-demand scanning, and exploit prevention.</p>
+                        <ul>
+                            <li>On-Access Scanner (OAS)</li>
+                            <li>On-Demand Scanner (ODS)</li>
+                            <li>Exploit Prevention</li>
+                            <li>ScriptScan (browser/Office)</li>
+                        </ul>
+                        <span class="badge endpoint">Required</span>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🔥</div>
+                            <h4 class="card-title">Firewall</h4>
+                        </div>
+                        <p>Host-based firewall with stateful inspection, application control, and intrusion prevention.</p>
+                        <ul>
+                            <li>Stateful Packet Inspection</li>
+                            <li>Application-aware rules</li>
+                            <li>Location-aware policies</li>
+                            <li>Intrusion Detection (IDS)</li>
+                        </ul>
+                        <span class="badge endpoint">Optional</span>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <h4 class="card-title">Web Control</h4>
+                        </div>
+                        <p>URL filtering and web reputation protection at the endpoint level.</p>
+                        <ul>
+                            <li>URL Category Filtering</li>
+                            <li>Web Reputation (GTI)</li>
+                            <li>Download Scanning</li>
+                            <li>Browser Protection</li>
+                        </ul>
+                        <span class="badge endpoint">Optional</span>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🧠</div>
+                            <h4 class="card-title">Adaptive Threat Protection</h4>
+                        </div>
+                        <p>Advanced threat detection using machine learning and behavioral analysis.</p>
+                        <ul>
+                            <li>Real Protect (ML scanning)</li>
+                            <li>Dynamic Application Containment</li>
+                            <li>Enhanced Remediation</li>
+                            <li>Cloud-based analysis</li>
+                        </ul>
+                        <span class="badge endpoint">Recommended</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture">
+                <h2>ENS Architecture</h2>
+
+                <div class="ascii-diagram endpoint">
+<pre>
+ENS MODULE ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              TRELLIX AGENT (McAfee Agent)                                │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                           AGENT FRAMEWORK                                          │  │
+│  │                                                                                    │  │
+│  │   • ePO Communication (ASCI)        • Policy Enforcement                          │  │
+│  │   • Update Management               • Event Forwarding                            │  │
+│  │   • Product Orchestration           • Self-Protection (MACC)                      │  │
+│  │                                                                                    │  │
+│  └───────────────────────────────────────────────────────────────────────────────────┘  │
+│                                          │                                               │
+│                                          │ Product APIs                                  │
+│                                          ▼                                               │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                              ENS PLATFORM                                          │  │
+│  │                                                                                    │  │
+│  │   ┌─────────────────────────────────────────────────────────────────────────────┐│  │
+│  │   │                        COMMON COMPONENTS                                     ││  │
+│  │   │   • AMCore (Scanning Engine)      • Content (DAT files, rules)              ││  │
+│  │   │   • ENS Platform Service          • Self-Protection                         ││  │
+│  │   │   • Common UI Framework           • Logging & Diagnostics                   ││  │
+│  │   └─────────────────────────────────────────────────────────────────────────────┘│  │
+│  │                                                                                    │  │
+│  │   ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐ ┌──────────────┐│  │
+│  │   │     THREAT       │ │     FIREWALL     │ │   WEB CONTROL    │ │     ATP      ││  │
+│  │   │   PREVENTION     │ │                  │ │                  │ │              ││  │
+│  │   │                  │ │                  │ │                  │ │              ││  │
+│  │   │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────┐ ││  │
+│  │   │ │ On-Access    │ │ │ │ Stateful     │ │ │ │ URL Filter   │ │ │ │Real      │ ││  │
+│  │   │ │ Scanner      │ │ │ │ Inspection   │ │ │ │              │ │ │ │Protect   │ ││  │
+│  │   │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────┘ ││  │
+│  │   │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────┐ ││  │
+│  │   │ │ On-Demand    │ │ │ │ App Control  │ │ │ │ GTI Lookup   │ │ │ │Dynamic   │ ││  │
+│  │   │ │ Scanner      │ │ │ │              │ │ │ │              │ │ │ │App Cont. │ ││  │
+│  │   │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────┘ ││  │
+│  │   │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────────┐ │ │ ┌──────────┐ ││  │
+│  │   │ │ Exploit      │ │ │ │ IDS/IPS      │ │ │ │ Download     │ │ │ │Enhanced  │ ││  │
+│  │   │ │ Prevention   │ │ │ │ Rules        │ │ │ │ Scanning     │ │ │ │Remediate │ ││  │
+│  │   │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────────┘ │ │ └──────────┘ ││  │
+│  │   │ ┌──────────────┐ │ │ ┌──────────────┐ │ │                  │ │              ││  │
+│  │   │ │ ScriptScan   │ │ │ │ Location     │ │ │                  │ │              ││  │
+│  │   │ │ (AMSI)       │ │ │ │ Awareness    │ │ │                  │ │              ││  │
+│  │   │ └──────────────┘ │ │ └──────────────┘ │ │                  │ │              ││  │
+│  │   └──────────────────┘ └──────────────────┘ └──────────────────┘ └──────────────┘│  │
+│  │                                                                                    │  │
+│  └───────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                          │
+│                    ┌──────────────────────────────────────────────┐                     │
+│                    │              KERNEL DRIVERS                   │                     │
+│                    │   • mfehidk.sys (File System Filter)         │                     │
+│                    │   • mfefirek.sys (Firewall Driver)           │                     │
+│                    │   • mfeavfk.sys (Anti-Virus Filter)          │                     │
+│                    │   • mfencbdc.sys (Network Driver)            │                     │
+│                    └──────────────────────────────────────────────┘                     │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+
+DATA FLOW:
+━━━━━━━━━━
+┌────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  File      │────►│  FS Filter  │────►│  AMCore     │────►│  Action     │
+│  Access    │     │  Driver     │     │  Scan       │     │  (Allow/    │
+│            │     │             │     │  Engine     │     │   Block)    │
+└────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+                                              │
+                                              ▼
+                                       ┌─────────────┐
+                                       │  GTI Cloud  │
+                                       │  Lookup     │
+                                       │  (Optional) │
+                                       └─────────────┘
+</pre>
+                </div>
+
+                <h3>Key Processes & Services</h3>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Description</th>
+                                <th>Module</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>mfetp.exe</code></td>
+                                <td>Threat Prevention service (OAS, ODS)</td>
+                                <td>Threat Prevention</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfefwc.exe</code></td>
+                                <td>Firewall core service</td>
+                                <td>Firewall</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfewc.exe</code></td>
+                                <td>Web Control service</td>
+                                <td>Web Control</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfeatp.exe</code></td>
+                                <td>Adaptive Threat Protection service</td>
+                                <td>ATP</td>
+                            </tr>
+                            <tr>
+                                <td><code>McAPExe.exe</code></td>
+                                <td>Access Protection service</td>
+                                <td>Platform</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfemms.exe</code></td>
+                                <td>Module Management service</td>
+                                <td>Platform</td>
+                            </tr>
+                            <tr>
+                                <td><code>McScript_InUse.exe</code></td>
+                                <td>On-Demand scanner process</td>
+                                <td>Threat Prevention</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Threat Prevention Section -->
+            <section id="threat-prevention">
+                <h2>Threat Prevention Module</h2>
+                
+                <p>
+                    The core protection module providing real-time and scheduled malware detection. 
+                    Uses signature-based detection, heuristics, and cloud reputation lookups.
+                </p>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="oas">On-Access Scanner</button>
+                        <button class="tab-button" data-tab="ods">On-Demand Scanner</button>
+                        <button class="tab-button" data-tab="exploit">Exploit Prevention</button>
+                    </div>
+                    
+                    <div class="tab-panel active" id="oas">
+                        <div class="card">
+                            <h4>On-Access Scanner (OAS)</h4>
+                            <p>Real-time scanning of files as they are accessed, created, or modified.</p>
+                            
+                            <h5>Scan Triggers:</h5>
+                            <ul>
+                                <li><strong>On Read</strong> — File is opened for reading</li>
+                                <li><strong>On Write</strong> — File is created or modified</li>
+                                <li><strong>On Network Access</strong> — Network file access (UNC paths)</li>
+                            </ul>
+                            
+                            <h5>Key Settings:</h5>
+                            <div class="code-block">
+                                <div class="code-block-header">
+                                    <span class="code-block-title">Recommended OAS Configuration</span>
+                                </div>
+<pre>Scan Items:
+  ├── All Files (or by extension for performance)
+  ├── Archives: Enabled (depth 2-3)
+  ├── MIME-encoded files: Enabled
+  └── Unwanted Programs: Enabled
+
+Actions:
+  ├── Primary: Clean
+  ├── Secondary: Delete
+  └── Unwanted Programs: Block
+
+Performance:
+  ├── Scan timeout: 45 seconds
+  ├── Cache clean files: Enabled
+  └── Trust files from McAfee signed: Enabled</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="ods">
+                        <div class="card">
+                            <h4>On-Demand Scanner (ODS)</h4>
+                            <p>Scheduled or manual full-system and targeted scans.</p>
+                            
+                            <h5>Scan Types:</h5>
+                            <ul>
+                                <li><strong>Quick Scan</strong> — Running processes, common malware locations</li>
+                                <li><strong>Full Scan</strong> — All local drives and mounted volumes</li>
+                                <li><strong>Custom Scan</strong> — Specific folders or drives</li>
+                                <li><strong>Right-Click Scan</strong> — User-initiated targeted scan</li>
+                            </ul>
+                            
+                            <h5>Scheduling Best Practices:</h5>
+                            <ul>
+                                <li>Run weekly full scans during off-hours</li>
+                                <li>Use CPU throttling (25-50%) during business hours</li>
+                                <li>Enable "Scan when system is idle" option</li>
+                                <li>Randomize scan start times to distribute load</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="exploit">
+                        <div class="card">
+                            <h4>Exploit Prevention</h4>
+                            <p>Behavioral rules protecting against memory corruption and code execution exploits.</p>
+                            
+                            <h5>Protection Categories:</h5>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Techniques Blocked</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Buffer Overflow</td>
+                                            <td>Stack/Heap overflow, DEP bypass</td>
+                                        </tr>
+                                        <tr>
+                                            <td>API Hooking</td>
+                                            <td>IAT hooking, inline hooking protection</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Code Injection</td>
+                                            <td>Process injection, DLL injection</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Credential Theft</td>
+                                            <td>LSASS access, mimikatz techniques</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Privilege Escalation</td>
+                                            <td>Token manipulation, UAC bypass</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="callout warning">
+                                <div class="callout-icon">⚠️</div>
+                                <div class="callout-content">
+                                    <div class="callout-title">Exploit Prevention Tuning</div>
+                                    <p>Exploit Prevention rules may require tuning for legitimate applications. Start in "Report Only" mode and create exclusions before enabling "Block" mode in production.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Firewall Section -->
+            <section id="firewall">
+                <h2>Firewall Module</h2>
+                
+                <p>
+                    Host-based stateful firewall with application awareness and intrusion detection 
+                    capabilities. Can operate independently or alongside Windows Firewall.
+                </p>
+
+                <div class="card endpoint">
+                    <h4>Firewall Features</h4>
+                    
+                    <div class="grid grid-2">
+                        <div>
+                            <h5>Core Capabilities:</h5>
+                            <ul>
+                                <li>Stateful packet inspection</li>
+                                <li>Application-based rules</li>
+                                <li>Network zone classification</li>
+                                <li>Location-aware policies</li>
+                                <li>Adaptive mode learning</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5>Intrusion Detection:</h5>
+                            <ul>
+                                <li>Signature-based IDS</li>
+                                <li>Protocol anomaly detection</li>
+                                <li>Port scan detection</li>
+                                <li>DoS protection</li>
+                                <li>IP spoofing detection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Location Awareness</h3>
+                <p>
+                    The firewall can apply different rule sets based on network location, allowing 
+                    stricter policies when off-network.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Location Detection Criteria</span>
+                    </div>
+<pre>Corporate Network Detection:
+  ├── DNS Suffix: corp.company.com
+  ├── Default Gateway: 10.0.0.1
+  ├── DHCP Server: 10.0.0.50
+  └── Domain Controller Accessible: Yes
+
+Policy Assignment:
+  ├── Corporate Location → Relaxed Policy (internal apps allowed)
+  ├── VPN Location → Moderate Policy (split tunnel rules)
+  └── Untrusted Location → Strict Policy (block inbound)</pre>
+                </div>
+            </section>
+
+            <!-- Web Control Section -->
+            <section id="web-control">
+                <h2>Web Control Module</h2>
+                
+                <p>
+                    Endpoint-based web filtering providing URL categorization and reputation-based 
+                    protection even when users are off-network.
+                </p>
+
+                <div class="card endpoint">
+                    <h4>Protection Layers</h4>
+                    <ul>
+                        <li><strong>URL Category Filtering</strong> — Block access by content category (gambling, adult, etc.)</li>
+                        <li><strong>Web Reputation (GTI)</strong> — Real-time reputation lookup for visited URLs</li>
+                        <li><strong>Download Scanning</strong> — Scan downloaded files before execution</li>
+                        <li><strong>Phishing Protection</strong> — Block known phishing sites</li>
+                        <li><strong>Browser Toolbar</strong> — Visual indicator of site safety rating</li>
+                    </ul>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Web Control vs Web Gateway</div>
+                        <p>Web Control provides endpoint-level filtering suitable for mobile users. For comprehensive web security with SSL inspection, consider Trellix Web Gateway (SWG) for network-level protection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ATP Section -->
+            <section id="atp">
+                <h2>Adaptive Threat Protection (ATP)</h2>
+                
+                <p>
+                    Advanced threat detection module using machine learning and behavioral analysis 
+                    to identify zero-day threats and fileless attacks.
+                </p>
+
+                <div class="ascii-diagram endpoint">
+<pre>
+ATP DETECTION FLOW
+══════════════════════════════════════════════════════════════════════════════
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              FILE/PROCESS EVENT                                │
+└─────────────────────────────────────────┬─────────────────────────────────────┘
+                                          │
+                                          ▼
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                           REAL PROTECT (LOCAL)                                 │
+│                                                                                │
+│   ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐          │
+│   │  Static ML      │    │  Pre-execution  │    │  Post-execution │          │
+│   │  Analysis       │───►│  Behavioral     │───►│  Behavioral     │          │
+│   │  (PE Features)  │    │  Analysis       │    │  Analysis       │          │
+│   └─────────────────┘    └─────────────────┘    └─────────────────┘          │
+│                                                                                │
+│   Detection Types:                                                             │
+│   • PE Packer detection        • Process hollowing                            │
+│   • Entropy analysis           • Reflective DLL loading                       │
+│   • Import table anomalies     • Script-based attacks                         │
+└─────────────────────────────────────────┬─────────────────────────────────────┘
+                                          │
+                                          │ Unknown/Suspicious
+                                          ▼
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                           REAL PROTECT (CLOUD)                                 │
+│                                                                                │
+│   ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐          │
+│   │  Cloud ML       │    │  GTI Reputation │    │  Sandbox        │          │
+│   │  Scoring        │◄──►│  Lookup         │◄──►│  Analysis       │          │
+│   │                 │    │                 │    │  (Optional)     │          │
+│   └─────────────────┘    └─────────────────┘    └─────────────────┘          │
+│                                                                                │
+│   Response:                                                                    │
+│   • Trust Score returned       • Reputation verdict                           │
+│   • Detection signature        • Recommended action                           │
+└─────────────────────────────────────────┬─────────────────────────────────────┘
+                                          │
+                                          ▼
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                        DYNAMIC APPLICATION CONTAINMENT                         │
+│                                                                                │
+│   For Unknown/Gray Files:                                                      │
+│   ┌──────────────────────────────────────────────────────────────────────┐   │
+│   │  • Restrict registry modifications                                    │   │
+│   │  • Block process injection                                            │   │
+│   │  • Prevent network access (configurable)                              │   │
+│   │  • Monitor and log all activities                                     │   │
+│   │  • Auto-release when verdict received                                 │   │
+│   └──────────────────────────────────────────────────────────────────────┘   │
+│                                                                                │
+└───────────────────────────────────────────────────────────────────────────────┘
+</pre>
+                </div>
+
+                <h3>ATP Configuration Levels</h3>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Security Level</th>
+                                <th>Behavior</th>
+                                <th>Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Productivity</strong></td>
+                                <td>Minimal blocking, maximum observability</td>
+                                <td>Initial deployment, low-risk environments</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Balance</strong></td>
+                                <td>Block known bad, contain unknown</td>
+                                <td>Most production environments</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Security</strong></td>
+                                <td>Block unknown, strict containment</td>
+                                <td>High-security environments</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">ATP + EDR Integration</div>
+                        <p>ATP telemetry feeds into Trellix EDR for advanced threat hunting and investigation. Events flagged by ATP appear in EDR timelines with full process context.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="epo-fundamentals.html" class="btn btn-ghost">← ePO Fundamentals</a>
+                <a href="edr-fundamentals.html" class="btn btn-primary">EDR Fundamentals →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

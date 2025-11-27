@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trellix Troubleshooting Master Guide - Common issues, log locations, and diagnostic procedures.">
+    <title>Troubleshooting Guide - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html" class="active">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Troubleshooting</div>
+            <ul class="sidebar-nav">
+                <li><a href="troubleshooting.html" class="active">Master Guide</a></li>
+                <li><a href="troubleshoot-epo.html" data-category="epo">ePO Issues</a></li>
+                <li><a href="troubleshoot-endpoint.html" data-category="endpoint">Endpoint Issues</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">On This Page</div>
+            <ul class="sidebar-nav">
+                <li><a href="#diagnostic-tools">Diagnostic Tools</a></li>
+                <li><a href="#log-locations">Log Locations</a></li>
+                <li><a href="#epo-issues">ePO Issues</a></li>
+                <li><a href="#agent-issues">Agent Issues</a></li>
+                <li><a href="#ens-issues">ENS Issues</a></li>
+                <li><a href="#mer-collection">MER Collection</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span>Troubleshooting</span>
+                </div>
+                <h1>Troubleshooting Master Guide</h1>
+                <p class="hero-subtitle">
+                    Comprehensive troubleshooting reference for ePO, agents, ENS, EDR, DLP, and 
+                    other Trellix products. Log locations, diagnostic tools, and common resolutions.
+                </p>
+                <div class="page-meta">
+                    <span class="page-meta-item">📖 30 min read</span>
+                </div>
+            </div>
+
+            <!-- Diagnostic Tools Section -->
+            <section id="diagnostic-tools">
+                <h2>Diagnostic Tools</h2>
+                
+                <p>
+                    Trellix provides several diagnostic tools for troubleshooting. Familiarize yourself 
+                    with these before investigating issues.
+                </p>
+
+                <div class="product-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔧</div>
+                            <h4 class="card-title">McAfee MER Tool</h4>
+                        </div>
+                        <p>Minimum Escalation Requirements tool collects comprehensive diagnostic data from endpoints.</p>
+                        <ul>
+                            <li>Logs from all products</li>
+                            <li>System information</li>
+                            <li>Event logs</li>
+                            <li>Configuration files</li>
+                        </ul>
+                        <span class="version-tag">Support Essential</span>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🩺</div>
+                            <h4 class="card-title">MVT (McAfee Validation Tool)</h4>
+                        </div>
+                        <p>Quick health check tool for agent and ENS status verification.</p>
+                        <ul>
+                            <li>Agent connectivity</li>
+                            <li>Service status</li>
+                            <li>DAT version</li>
+                            <li>Policy compliance</li>
+                        </ul>
+                        <span class="version-tag">Quick Diagnostics</span>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📊</div>
+                            <h4 class="card-title">ePO Server Dashboard</h4>
+                        </div>
+                        <p>Built-in server health monitoring within ePO console.</p>
+                        <ul>
+                            <li>Server performance</li>
+                            <li>Database health</li>
+                            <li>Event queue status</li>
+                            <li>Handler connectivity</li>
+                        </ul>
+                        <span class="version-tag">Server-side</span>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">💻</div>
+                            <h4 class="card-title">cmdagent.exe</h4>
+                        </div>
+                        <p>Command-line agent utility for local troubleshooting.</p>
+                        <ul>
+                            <li>Force check-in</li>
+                            <li>Policy refresh</li>
+                            <li>Event upload</li>
+                            <li>Status queries</li>
+                        </ul>
+                        <span class="version-tag">Endpoint CLI</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Log Locations Section -->
+            <section id="log-locations">
+                <h2>Log File Locations</h2>
+                
+                <p>
+                    Knowing log locations is essential for troubleshooting. Below are the key log files 
+                    for each Trellix component.
+                </p>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="epo-logs">ePO Server</button>
+                        <button class="tab-button" data-tab="agent-logs">McAfee Agent</button>
+                        <button class="tab-button" data-tab="ens-logs">ENS</button>
+                        <button class="tab-button" data-tab="dlp-logs">DLP</button>
+                    </div>
+                    
+                    <div class="tab-panel active" id="epo-logs">
+                        <div class="code-block">
+                            <div class="code-block-header">
+                                <span class="code-block-title">ePO Server Log Locations</span>
+                                <button class="code-block-copy">Copy</button>
+                            </div>
+<pre># ePO Server Logs (Windows)
+C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Server\Logs\
+
+Key Files:
+├── server.log              # Main ePO server log
+├── orion.log              # ePO console/web application
+├── server_YYYYMMDD.log    # Daily archived logs
+├── db\migration.log       # Database migration logs
+├── apache\error.log       # Apache web server errors
+└── apache\access.log      # Web access logs
+
+# Agent Handler Logs
+C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Agent Handler\Logs\
+├── agent_handler.log      # Main handler log
+└── masvc.log              # Handler service log
+
+# Event Parser Logs
+C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Server\EventParser\Logs\
+└── eventparser.log        # Event processing log
+
+# Tomcat Logs (Console)
+C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Server\Conf\Catalina\localhost\
+└── console_YYYY-MM-DD.log # Console errors</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="agent-logs">
+                        <div class="code-block">
+                            <div class="code-block-header">
+                                <span class="code-block-title">McAfee Agent Log Locations</span>
+                                <button class="code-block-copy">Copy</button>
+                            </div>
+<pre># McAfee Agent Logs (Windows)
+C:\ProgramData\McAfee\Agent\Logs\
+
+Key Files:
+├── macompatsvc.log        # Compatibility service
+├── masvc.log              # Main agent service
+├── maupdater.log          # Update service
+├── macmnsvc.log           # Common service
+├── marepomirror.log       # Repository mirror (Super Agent)
+└── UpdaterUI.log          # Update UI log
+
+# Agent Configuration
+C:\ProgramData\McAfee\Agent\
+├── agent.log              # Main agent log
+├── agent.properties       # Agent configuration
+├── sitelist.xml           # Server/repository list
+└── reqseckey              # Server communication key
+
+# Agent Data Directory
+C:\ProgramData\McAfee\Agent\DB\
+└── ma.db                  # Agent SQLite database
+
+# macOS Agent Logs
+/var/McAfee/agent/logs/
+/Library/McAfee/agent/logs/
+
+# Linux Agent Logs
+/var/log/McAfeeAgent/
+/opt/McAfee/agent/logs/</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="ens-logs">
+                        <div class="code-block">
+                            <div class="code-block-header">
+                                <span class="code-block-title">ENS Log Locations</span>
+                                <button class="code-block-copy">Copy</button>
+                            </div>
+<pre># ENS Threat Prevention Logs (Windows)
+C:\ProgramData\McAfee\Endpoint Security\Logs\
+
+Key Files:
+├── EndpointSecurityPlatform.log    # Platform service
+├── ThreatPrevention.log            # On-access scanner
+├── OnDemandScan.log                # On-demand scanner
+├── ExploitPrevention.log           # Exploit prevention
+├── AccessProtection.log            # Access protection rules
+├── Firewall.log                    # Firewall module
+├── WebControl.log                  # Web control module
+└── AdaptiveThreatProtection.log    # ATP/Real Protect
+
+# ENS Threat Prevention Content
+C:\Program Files\McAfee\Endpoint Security\Threat Prevention\
+├── Engine\                         # Scan engine
+└── Content\                        # DAT files
+
+# ENS Self-Protection Logs
+C:\ProgramData\McAfee\Endpoint Security\Platform\Logs\
+└── ens_selfprotect.log
+
+# Detection History
+C:\ProgramData\McAfee\Endpoint Security\Logs\
+└── Detection_History\              # Historical detections
+
+# Quarantine Location
+C:\Quarantine\                      # Quarantined files</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="dlp-logs">
+                        <div class="code-block">
+                            <div class="code-block-header">
+                                <span class="code-block-title">DLP Endpoint Log Locations</span>
+                                <button class="code-block-copy">Copy</button>
+                            </div>
+<pre># DLP Endpoint Logs (Windows)
+C:\ProgramData\McAfee\DLP\Logs\
+
+Key Files:
+├── dlpe.log               # Main DLP endpoint log
+├── dlpe_agent.log         # DLP agent service
+├── fcag.log               # File classification agent
+├── dlpwd.log              # Watchdog service
+└── dlpe_debug.log         # Debug logging (when enabled)
+
+# DLP Evidence (Local Cache)
+C:\ProgramData\McAfee\DLP\Evidence\
+
+# DLP Classifications
+C:\ProgramData\McAfee\DLP\Classifications\
+
+# DLP Registry Keys (Configuration)
+HKLM\SOFTWARE\McAfee\DLP\Agent
+
+# DLP Network Appliance Logs
+/var/log/mcafee/dlp/               # Linux appliance
+├── dlp_prevent.log
+├── dlp_monitor.log
+└── dlp_discover.log</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ePO Issues Section -->
+            <section id="epo-issues">
+                <h2>Common ePO Issues</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 ePO Console Not Loading</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>Browser shows connection error</li>
+                                <li>Timeout when accessing ePO console</li>
+                                <li>HTTP 500 or 503 errors</li>
+                            </ul>
+                            
+                            <h5>Troubleshooting Steps:</h5>
+                            <ol>
+                                <li>Verify ePO services are running:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">PowerShell</span>
+                                        </div>
+<pre>Get-Service | Where-Object {$_.Name -like "*McAfee*" -or $_.Name -like "*ePO*"}</pre>
+                                    </div>
+                                </li>
+                                <li>Check port availability:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">PowerShell</span>
+                                        </div>
+<pre>Test-NetConnection -ComputerName localhost -Port 8443
+Test-NetConnection -ComputerName localhost -Port 443</pre>
+                                    </div>
+                                </li>
+                                <li>Review server.log for errors</li>
+                                <li>Restart ePO services:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>net stop "McAfee ePolicy Orchestrator Server"
+net start "McAfee ePolicy Orchestrator Server"</pre>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Database Connection Issues</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>"Unable to connect to database" errors</li>
+                                <li>Slow console performance</li>
+                                <li>Event processing delays</li>
+                            </ul>
+                            
+                            <h5>Troubleshooting Steps:</h5>
+                            <ol>
+                                <li>Verify SQL Server connectivity:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>sqlcmd -S SQLSERVER -d ePO_SERVERNAME -Q "SELECT 1"</pre>
+                                    </div>
+                                </li>
+                                <li>Check SQL Server service status</li>
+                                <li>Verify SQL authentication credentials</li>
+                                <li>Check database size and transaction log:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">SQL Query</span>
+                                        </div>
+<pre>SELECT name, size * 8 / 1024 AS 'Size_MB'
+FROM sys.database_files;</pre>
+                                    </div>
+                                </li>
+                                <li>Run ePO database health check query</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Repository Replication Failures</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>Distributed repositories out of sync</li>
+                                <li>Agents failing to get updates</li>
+                                <li>Replication tasks failing in ePO</li>
+                            </ul>
+                            
+                            <h5>Troubleshooting Steps:</h5>
+                            <ol>
+                                <li>Verify network connectivity to distributed repositories</li>
+                                <li>Check repository credentials</li>
+                                <li>Verify disk space on repository servers</li>
+                                <li>Check firewall rules for repository ports</li>
+                                <li>Review Server Task log for replication errors</li>
+                                <li>Manually trigger repository pull task</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Agent Issues Section -->
+            <section id="agent-issues">
+                <h2>Common Agent Issues</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Agent Not Checking In</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>System shows as "Not Managed" or stale in ePO</li>
+                                <li>Last communication time is outdated</li>
+                                <li>Agent icon shows red X</li>
+                            </ul>
+                            
+                            <h5>Troubleshooting Steps:</h5>
+                            <ol>
+                                <li>Verify agent services are running:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>sc query mfemms
+sc query masvc</pre>
+                                    </div>
+                                </li>
+                                <li>Force agent check-in:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command (Run as Admin)</span>
+                                        </div>
+<pre>cd "C:\Program Files\McAfee\Agent"
+cmdagent.exe -p
+cmdagent.exe -c</pre>
+                                    </div>
+                                </li>
+                                <li>Verify ePO server/handler connectivity:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>telnet epo-server.company.com 443
+telnet agent-handler.company.com 443</pre>
+                                    </div>
+                                </li>
+                                <li>Check sitelist.xml for correct server entries</li>
+                                <li>Review masvc.log for connection errors</li>
+                            </ol>
+                            
+                            <div class="callout tip">
+                                <div class="callout-icon">💡</div>
+                                <div class="callout-content">
+                                    <div class="callout-title">Quick Agent Status</div>
+                                    <p>Run <code>cmdagent.exe -i</code> to display current agent status, server list, and last check-in time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Agent Not Receiving Policies</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>Policy changes not applying to endpoints</li>
+                                <li>Endpoint shows old policy version</li>
+                                <li>Settings don't match ePO configuration</li>
+                            </ul>
+                            
+                            <h5>Troubleshooting Steps:</h5>
+                            <ol>
+                                <li>Verify agent is communicating (check last comms time)</li>
+                                <li>Force policy enforcement:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>cmdagent.exe -e</pre>
+                                    </div>
+                                </li>
+                                <li>Wake up agent from ePO console</li>
+                                <li>Check System Tree location and policy assignment</li>
+                                <li>Verify policy inheritance and overrides</li>
+                                <li>Review agent.log for policy errors</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Agent Installation Failures</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Common Causes:</h5>
+                            <ul>
+                                <li>Existing security software conflicts</li>
+                                <li>Insufficient permissions (admin rights required)</li>
+                                <li>Windows Installer issues</li>
+                                <li>Framework requirements not met (.NET, VC++)</li>
+                            </ul>
+                            
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Remove competing AV software</li>
+                                <li>Verify local admin rights</li>
+                                <li>Check Windows Installer service</li>
+                                <li>Use verbose logging:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>FramePkg.exe /install=agent /silent /log=c:\temp\agent_install.log</pre>
+                                    </div>
+                                </li>
+                                <li>Review installation log for specific errors</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ENS Issues Section -->
+            <section id="ens-issues">
+                <h2>Common ENS Issues</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Performance Issues / Slow Scanning</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>High CPU usage by mfetp.exe</li>
+                                <li>Slow application launches</li>
+                                <li>File operations taking too long</li>
+                            </ul>
+                            
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Review exclusions — add legitimate high-I/O paths</li>
+                                <li>Check scan settings (disable unnecessary scan types)</li>
+                                <li>Reduce archive scan depth</li>
+                                <li>Enable scan caching for clean files</li>
+                                <li>Verify DAT files are current (outdated DATs can be slower)</li>
+                                <li>Analyze with Process Monitor to identify specific bottlenecks</li>
+                            </ol>
+                            
+                            <h5>Recommended Exclusions for Common Apps:</h5>
+                            <div class="code-block">
+                                <div class="code-block-header">
+                                    <span class="code-block-title">Common Exclusion Paths</span>
+                                </div>
+<pre># SQL Server
+C:\Program Files\Microsoft SQL Server\*\MSSQL\DATA\
+*.mdf
+*.ldf
+*.ndf
+
+# Exchange
+C:\Program Files\Microsoft\Exchange Server\*
+*.edb
+*.stm
+
+# Development Tools
+C:\Users\*\AppData\Local\JetBrains\*
+C:\Users\*\.nuget\*
+node_modules\</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 DAT Updates Not Working</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>DAT version outdated by multiple days</li>
+                                <li>Update tasks showing failures</li>
+                                <li>Manual updates failing</li>
+                            </ul>
+                            
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Verify repository connectivity:
+                                    <div class="code-block">
+                                        <div class="code-block-header">
+                                            <span class="code-block-title">Command</span>
+                                        </div>
+<pre>cmdagent.exe -r</pre>
+                                    </div>
+                                </li>
+                                <li>Check sitelist.xml for correct repository entries</li>
+                                <li>Verify repository has current content</li>
+                                <li>Force update from specific repository</li>
+                                <li>Check proxy settings if applicable</li>
+                                <li>Review maupdater.log for errors</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 False Positives / Blocked Applications</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Identify the specific detection in Threat Prevention log</li>
+                                <li>Check detection name and file hash</li>
+                                <li>Verify if legitimate application via:
+                                    <ul>
+                                        <li>Known vendor signature</li>
+                                        <li>VirusTotal analysis</li>
+                                        <li>GTI reputation lookup</li>
+                                    </ul>
+                                </li>
+                                <li>Create appropriate exclusion:
+                                    <ul>
+                                        <li>By file path (least preferred)</li>
+                                        <li>By file hash (SHA-256 preferred)</li>
+                                        <li>By certificate (for signed software)</li>
+                                    </ul>
+                                </li>
+                                <li>Test exclusion in limited scope before deployment</li>
+                                <li>Report false positive to Trellix Labs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MER Collection Section -->
+            <section id="mer-collection">
+                <h2>MER Collection Guide</h2>
+                
+                <p>
+                    The Minimum Escalation Requirements (MER) tool collects diagnostic data required 
+                    for Trellix support cases. Always collect MER before opening a support ticket.
+                </p>
+
+                <div class="card">
+                    <h4>Running MER Tool</h4>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-title">Download MER Tool</div>
+                            <div class="step-content">Download the latest MER tool from Trellix support portal or extract from ePO console (Menu → Software → MER).</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title">Run as Administrator</div>
+                            <div class="step-content">Execute <code>MER.exe</code> with administrative privileges. Select relevant products to collect logs for.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title">Wait for Collection</div>
+                            <div class="step-content">MER collects logs, configuration, and system information. This may take 5-15 minutes depending on log sizes.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title">Upload Results</div>
+                            <div class="step-content">Locate the generated .tgz file and upload to your Trellix support case.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Command-Line MER Collection</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre># Silent MER collection with all products
+MER.exe -silent -all
+
+# MER for specific products
+MER.exe -silent -products "MA,ENS,DLP"
+
+# MER with custom output location
+MER.exe -silent -all -output "C:\Temp\MER_Output"</pre>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">MER Contains Sensitive Data</div>
+                        <p>MER files may contain hostnames, usernames, and configuration details. Review contents before sharing and use secure file transfer methods.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Reference Section -->
+            <section>
+                <h2>Quick Reference Commands</h2>
+                
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Essential Agent Commands</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre># Agent status
+cmdagent.exe -i
+
+# Force check-in to ePO
+cmdagent.exe -p
+cmdagent.exe -c
+
+# Force policy enforcement
+cmdagent.exe -e
+
+# Force update
+cmdagent.exe -u
+
+# Show repository list
+cmdagent.exe -r
+
+# Restart all McAfee services
+net stop mfemms && net start mfemms
+
+# Check ENS services
+sc query mfetp
+sc query mfefwc
+sc query mfewc
+
+# Check DAT version
+reg query "HKLM\SOFTWARE\McAfee\AVEngine" /v AVDatVersion</pre>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="dlp-architecture.html" class="btn btn-ghost">← DLP Architecture</a>
+                <a href="../index.html" class="btn btn-primary">Back to Home →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

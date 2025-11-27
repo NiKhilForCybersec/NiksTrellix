@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trellix EDR - Endpoint Detection and Response for advanced threat hunting and incident response.">
+    <title>EDR Fundamentals - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html" class="active">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">EDR / XDR</div>
+            <ul class="sidebar-nav">
+                <li><a href="edr-fundamentals.html" data-category="endpoint" class="active">EDR Fundamentals</a></li>
+                <li><a href="edr-architecture.html" data-category="endpoint">EDR Architecture</a></li>
+                <li><a href="edr-detection.html" data-category="endpoint">Detection & Response</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">On This Page</div>
+            <ul class="sidebar-nav">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#epp-vs-edr">EPP vs EDR</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#telemetry">Telemetry Collection</a></li>
+                <li><a href="#detection">Detection Types</a></li>
+                <li><a href="#response">Response Actions</a></li>
+                <li><a href="#hunting">Threat Hunting</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="edr-fundamentals.html">EDR</a>
+                    <span class="separator">/</span>
+                    <span>Fundamentals</span>
+                </div>
+                <h1>Trellix EDR Fundamentals</h1>
+                <p class="hero-subtitle">
+                    Advanced endpoint detection and response for threat hunting, investigation, 
+                    and automated incident response across your enterprise.
+                </p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge endpoint">EDR</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>What is Trellix EDR?</h2>
+                
+                <p>
+                    <strong>Trellix EDR</strong> (Endpoint Detection and Response) provides continuous endpoint 
+                    monitoring, behavioral detection, and automated response capabilities. It collects rich 
+                    telemetry from endpoints to enable threat hunting, forensic investigation, and rapid 
+                    incident response.
+                </p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Product Heritage</div>
+                        <p>Trellix EDR combines technology from McAfee MVISION EDR and FireEye Endpoint Security (HX). The merger brought together McAfee's enterprise scale with FireEye's threat intelligence and Mandiant expertise.</p>
+                    </div>
+                </div>
+
+                <h3>Core Capabilities</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">🔍</div>
+                        <div class="stat-label">Visibility</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Continuous telemetry collection across processes, files, registry, and network</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">🎯</div>
+                        <div class="stat-label">Detection</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Behavioral analysis, IOC matching, and MITRE ATT&CK technique detection</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">🔬</div>
+                        <div class="stat-label">Investigation</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Timeline analysis, process trees, and forensic artifact collection</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">⚡</div>
+                        <div class="stat-label">Response</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Containment, remediation, and automated playbook execution</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EPP vs EDR Section -->
+            <section id="epp-vs-edr">
+                <h2>EPP vs EDR: Understanding the Difference</h2>
+                
+                <p>
+                    Endpoint Protection Platform (EPP) and EDR serve complementary but distinct purposes. 
+                    Most organizations deploy both for comprehensive endpoint security.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>EPP (ENS)</th>
+                                <th>EDR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Primary Purpose</strong></td>
+                                <td>Prevention</td>
+                                <td>Detection & Response</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protection Model</strong></td>
+                                <td>Block known threats</td>
+                                <td>Detect and investigate unknown threats</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data Collection</strong></td>
+                                <td>Limited (threat events only)</td>
+                                <td>Extensive (all endpoint activity)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Detection Method</strong></td>
+                                <td>Signatures, heuristics</td>
+                                <td>Behavioral analysis, ML, IOCs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Investigation</strong></td>
+                                <td>Basic alert details</td>
+                                <td>Full timeline, process tree, forensics</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Response</strong></td>
+                                <td>Automatic (clean/delete)</td>
+                                <td>Manual + Automated playbooks</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix Product</strong></td>
+                                <td>Endpoint Security (ENS)</td>
+                                <td>Trellix EDR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Deployment Recommendation</div>
+                        <p>Deploy ENS for prevention and EDR for detection/response. The two products share the same agent framework and integrate seamlessly through ePO management.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture">
+                <h2>EDR Architecture</h2>
+
+                <div class="ascii-diagram endpoint">
+<pre>
+TRELLIX EDR ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              TRELLIX XDR CLOUD PLATFORM                                  │
+│                                                                                          │
+│   ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│   │                           DETECTION & ANALYTICS ENGINE                           │   │
+│   │                                                                                  │   │
+│   │   ┌───────────────┐   ┌───────────────┐   ┌───────────────┐   ┌─────────────┐  │   │
+│   │   │  Behavioral   │   │   ML/AI       │   │   IOC         │   │   MITRE     │  │   │
+│   │   │  Rules        │   │   Models      │   │   Matching    │   │   ATT&CK    │  │   │
+│   │   │  Engine       │   │               │   │               │   │   Mapping   │  │   │
+│   │   └───────────────┘   └───────────────┘   └───────────────┘   └─────────────┘  │   │
+│   │                                                                                  │   │
+│   └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                               │
+│   ┌──────────────────────────────────────┴──────────────────────────────────────────┐   │
+│   │                          INVESTIGATION CONSOLE                                   │   │
+│   │                                                                                  │   │
+│   │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐   │   │
+│   │   │  Timeline   │  │  Process    │  │  File       │  │  Automated          │   │   │
+│   │   │  View       │  │  Tree       │  │  Analysis   │  │  Playbooks          │   │   │
+│   │   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────────────┘   │   │
+│   │                                                                                  │   │
+│   │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐   │   │
+│   │   │  Network    │  │  Registry   │  │  Alert      │  │  Case               │   │   │
+│   │   │  Artifacts  │  │  Changes    │  │  Triage     │  │  Management         │   │   │
+│   │   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────────────┘   │   │
+│   │                                                                                  │   │
+│   └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+│   ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│   │                          THREAT INTELLIGENCE                                     │   │
+│   │                                                                                  │   │
+│   │   • Trellix Advanced Research Center (ARC)    • Mandiant Threat Intel           │   │
+│   │   • Global Threat Intelligence (GTI)          • Custom IOC Feeds                │   │
+│   │                                                                                  │   │
+│   └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+└──────────────────────────────────────────────┬──────────────────────────────────────────┘
+                                               │
+                                               │ HTTPS :443
+                                               │ Telemetry Upload
+                                               │
+┌──────────────────────────────────────────────┴──────────────────────────────────────────┐
+│                                    ENDPOINTS                                             │
+│                                                                                          │
+│   ┌─────────────────────────────────────────────────────────────────────────────────┐   │
+│   │                              EDR SENSOR                                          │   │
+│   │                                                                                  │   │
+│   │   ┌─────────────────────────────────────────────────────────────────────────┐   │   │
+│   │   │                      TELEMETRY COLLECTION                                │   │   │
+│   │   │                                                                          │   │   │
+│   │   │   ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐           │   │   │
+│   │   │   │  Process  │  │   File    │  │  Network  │  │  Registry │           │   │   │
+│   │   │   │  Events   │  │   Events  │  │   Events  │  │   Events  │           │   │   │
+│   │   │   └───────────┘  └───────────┘  └───────────┘  └───────────┘           │   │   │
+│   │   │                                                                          │   │   │
+│   │   │   ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐           │   │   │
+│   │   │   │  Module   │  │  DNS      │  │  Auth     │  │  Script   │           │   │   │
+│   │   │   │  Loads    │  │  Queries  │  │  Events   │  │  Events   │           │   │   │
+│   │   │   └───────────┘  └───────────┘  └───────────┘  └───────────┘           │   │   │
+│   │   │                                                                          │   │   │
+│   │   └─────────────────────────────────────────────────────────────────────────┘   │   │
+│   │                                                                                  │   │
+│   │   ┌─────────────────────────────────────────────────────────────────────────┐   │   │
+│   │   │                      RESPONSE CAPABILITIES                               │   │   │
+│   │   │                                                                          │   │   │
+│   │   │   • Network Isolation      • Process Termination                        │   │   │
+│   │   │   • File Quarantine        • Registry Rollback                          │   │   │
+│   │   │   • Remote Shell           • Memory Acquisition                         │   │   │
+│   │   │   • File Retrieval         • Evidence Collection                        │   │   │
+│   │   │                                                                          │   │   │
+│   │   └─────────────────────────────────────────────────────────────────────────┘   │   │
+│   │                                                                                  │   │
+│   └─────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                          │
+│   Supported: Windows (7+), macOS (10.15+), Linux (RHEL, Ubuntu, CentOS)                │
+│                                                                                          │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <!-- Telemetry Section -->
+            <section id="telemetry">
+                <h2>Telemetry Collection</h2>
+                
+                <p>
+                    EDR collects comprehensive telemetry from endpoints to enable detection and investigation. 
+                    Understanding what data is collected helps with threat hunting and rule development.
+                </p>
+
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <button class="accordion-header">
+                            <span>⚙️ Process Telemetry</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Process Creation</strong> — Parent/child relationships, command lines, user context</li>
+                                <li><strong>Process Termination</strong> — Exit codes, duration</li>
+                                <li><strong>Module Loads</strong> — DLLs, drivers loaded into processes</li>
+                                <li><strong>Thread Creation</strong> — Remote thread injection detection</li>
+                                <li><strong>Memory Operations</strong> — VirtualAlloc, memory protection changes</li>
+                            </ul>
+                            <div class="code-block">
+                                <div class="code-block-header">
+                                    <span class="code-block-title">Example Process Event</span>
+                                </div>
+<pre>{
+  "event_type": "process_create",
+  "timestamp": "2024-01-15T14:32:45.123Z",
+  "process": {
+    "name": "powershell.exe",
+    "pid": 4528,
+    "command_line": "powershell.exe -enc SQBFAFgAIAAoAE4AZ...",
+    "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\",
+    "hash_sha256": "abc123...",
+    "user": "CORP\\jsmith",
+    "integrity_level": "medium"
+  },
+  "parent": {
+    "name": "cmd.exe",
+    "pid": 3892,
+    "command_line": "cmd.exe /c script.bat"
+  }
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>📁 File Telemetry</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>File Creation</strong> — New files written to disk</li>
+                                <li><strong>File Modification</strong> — Content changes, attribute changes</li>
+                                <li><strong>File Deletion</strong> — Deleted files (including by whom)</li>
+                                <li><strong>File Rename</strong> — Name/path changes</li>
+                                <li><strong>File Hashes</strong> — MD5, SHA1, SHA256 of interesting files</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🌐 Network Telemetry</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Connections</strong> — Source/destination IP, port, protocol</li>
+                                <li><strong>DNS Queries</strong> — Domain lookups with process attribution</li>
+                                <li><strong>HTTP Requests</strong> — URLs, user agents (where available)</li>
+                                <li><strong>Bytes Transferred</strong> — Data volume per connection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔑 Registry Telemetry</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Key Creation</strong> — New registry keys</li>
+                                <li><strong>Value Changes</strong> — Modified values with before/after</li>
+                                <li><strong>Key Deletion</strong> — Removed keys</li>
+                                <li><strong>Persistence Monitoring</strong> — Run keys, services, scheduled tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔐 Authentication Telemetry</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Logon Events</strong> — Interactive, network, service logons</li>
+                                <li><strong>Failed Logons</strong> — Brute force detection</li>
+                                <li><strong>Privilege Escalation</strong> — Token manipulation, runas</li>
+                                <li><strong>Credential Access</strong> — LSASS access, credential dumping attempts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detection Section -->
+            <section id="detection">
+                <h2>Detection Types</h2>
+                
+                <p>
+                    Trellix EDR uses multiple detection methods to identify threats across the kill chain.
+                </p>
+
+                <div class="product-grid">
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">📋</div>
+                            <h4 class="card-title">IOC Matching</h4>
+                        </div>
+                        <p>Match telemetry against known indicators of compromise:</p>
+                        <ul>
+                            <li>File hashes (MD5, SHA256)</li>
+                            <li>IP addresses & domains</li>
+                            <li>File paths & names</li>
+                            <li>Registry keys</li>
+                            <li>YARA rules</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🧠</div>
+                            <h4 class="card-title">Behavioral Rules</h4>
+                        </div>
+                        <p>Detect suspicious behavior patterns:</p>
+                        <ul>
+                            <li>Process injection techniques</li>
+                            <li>Credential harvesting</li>
+                            <li>Lateral movement patterns</li>
+                            <li>Data staging/exfiltration</li>
+                            <li>Persistence mechanisms</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🎯</div>
+                            <h4 class="card-title">MITRE ATT&CK</h4>
+                        </div>
+                        <p>Detections mapped to ATT&CK framework:</p>
+                        <ul>
+                            <li>Technique identification</li>
+                            <li>Tactic correlation</li>
+                            <li>Sub-technique coverage</li>
+                            <li>Campaign attribution</li>
+                            <li>Coverage gap analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🤖</div>
+                            <h4 class="card-title">ML/AI Detection</h4>
+                        </div>
+                        <p>Machine learning models for anomaly detection:</p>
+                        <ul>
+                            <li>Anomalous process behavior</li>
+                            <li>Unusual network patterns</li>
+                            <li>Rare event combinations</li>
+                            <li>User behavior analytics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>MITRE ATT&CK Coverage</h3>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tactic</th>
+                                <th>Example Techniques Detected</th>
+                                <th>Coverage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Initial Access</strong></td>
+                                <td>Phishing (T1566), Drive-by (T1189)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Execution</strong></td>
+                                <td>PowerShell (T1059.001), WMI (T1047)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Persistence</strong></td>
+                                <td>Registry Run Keys (T1547), Scheduled Tasks (T1053)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Privilege Escalation</strong></td>
+                                <td>Token Manipulation (T1134), UAC Bypass (T1548)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Defense Evasion</strong></td>
+                                <td>Process Injection (T1055), AMSI Bypass (T1562)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Credential Access</strong></td>
+                                <td>LSASS Dumping (T1003), Kerberoasting (T1558)</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lateral Movement</strong></td>
+                                <td>PSExec (T1570), RDP (T1021.001)</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Exfiltration</strong></td>
+                                <td>Data to Cloud (T1567), Encrypted Channel (T1573)</td>
+                                <td>Medium</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Response Section -->
+            <section id="response">
+                <h2>Response Actions</h2>
+                
+                <p>
+                    EDR provides both manual and automated response capabilities for containment and remediation.
+                </p>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="containment">Containment</button>
+                        <button class="tab-button" data-tab="remediation">Remediation</button>
+                        <button class="tab-button" data-tab="forensics">Forensics</button>
+                    </div>
+                    
+                    <div class="tab-panel active" id="containment">
+                        <div class="card">
+                            <h4>Containment Actions</h4>
+                            <ul>
+                                <li><strong>Network Isolation</strong> — Block all network traffic except to EDR cloud</li>
+                                <li><strong>Process Termination</strong> — Kill malicious processes remotely</li>
+                                <li><strong>Account Disable</strong> — Disable compromised user accounts (via integration)</li>
+                                <li><strong>File Quarantine</strong> — Move malicious files to quarantine folder</li>
+                            </ul>
+                            
+                            <div class="callout warning">
+                                <div class="callout-icon">⚠️</div>
+                                <div class="callout-content">
+                                    <div class="callout-title">Network Isolation</div>
+                                    <p>Network isolation is aggressive but effective. The endpoint can still communicate with EDR cloud for commands. Plan for business impact and have release procedures ready.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="remediation">
+                        <div class="card">
+                            <h4>Remediation Actions</h4>
+                            <ul>
+                                <li><strong>File Deletion</strong> — Remove malicious files</li>
+                                <li><strong>Registry Cleanup</strong> — Remove persistence keys</li>
+                                <li><strong>Service Removal</strong> — Delete malicious services</li>
+                                <li><strong>Scheduled Task Removal</strong> — Delete malicious tasks</li>
+                                <li><strong>Rollback</strong> — Restore files/registry to known-good state</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="forensics">
+                        <div class="card">
+                            <h4>Forensic Capabilities</h4>
+                            <ul>
+                                <li><strong>File Retrieval</strong> — Download specific files for analysis</li>
+                                <li><strong>Memory Acquisition</strong> — Capture process memory dumps</li>
+                                <li><strong>Disk Image</strong> — Trigger full disk imaging (via integration)</li>
+                                <li><strong>Evidence Package</strong> — Collect logs, artifacts, timeline</li>
+                                <li><strong>Remote Shell</strong> — Interactive command execution</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Hunting Section -->
+            <section id="hunting">
+                <h2>Threat Hunting</h2>
+                
+                <p>
+                    EDR enables proactive threat hunting by providing searchable telemetry data and 
+                    investigation tools.
+                </p>
+
+                <div class="card endpoint">
+                    <h4>Hunting Workflow</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-title">Hypothesis Development</div>
+                            <div class="step-content">Based on threat intelligence, recent incidents, or anomaly detection. Example: "Are there signs of Cobalt Strike beacons in our environment?"</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title">Query Construction</div>
+                            <div class="step-content">Build queries to search telemetry for indicators. Search for known Cobalt Strike IOCs, process patterns, or network behaviors.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title">Investigation</div>
+                            <div class="step-content">Review results, pivot on findings, build process trees, analyze timelines. Determine if activity is malicious or benign.</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title">Response</div>
+                            <div class="step-content">Contain threats if found. Document findings. Create detection rules to catch similar activity in the future.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Example Hunting Queries</h3>
+                
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Encoded PowerShell Execution</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre>process_name:powershell.exe AND 
+command_line:(*-enc* OR *-encoded* OR *-e * OR *frombase64*)</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">LSASS Access (Credential Dumping)</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre>target_process_name:lsass.exe AND 
+event_type:process_access AND 
+NOT process_name:(MsMpEng.exe OR csrss.exe)</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Suspicious Scheduled Task Creation</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre>event_type:registry_write AND 
+registry_path:*\\Schedule\\TaskCache\\Tasks\\* AND
+NOT process_name:(svchost.exe OR mmc.exe)</pre>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Hunting Resources</div>
+                        <p>Use the MITRE ATT&CK framework and Sigma rules as starting points for threat hunts. Many community detection rules can be adapted for Trellix EDR queries.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="endpoint-security.html" class="btn btn-ghost">← Endpoint Security</a>
+                <a href="dlp-architecture.html" class="btn btn-primary">DLP Architecture →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

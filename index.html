@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive documentation for Trellix Security Platform - ePO, ENS, EDR, DLP, SIEM, and more.">
+    <title>Trellix Security Platform - Ultimate Documentation Guide</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="index.html" class="active">Home</a>
+            <a href="pages/epo-fundamentals.html">ePO</a>
+            <a href="pages/endpoint-security.html">Endpoint</a>
+            <a href="pages/edr-fundamentals.html">EDR</a>
+            <a href="pages/dlp-architecture.html">DLP</a>
+            <a href="pages/troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Getting Started</div>
+            <ul class="sidebar-nav">
+                <li><a href="index.html" class="active">Overview</a></li>
+                <li><a href="pages/history.html">Company History</a></li>
+                <li><a href="pages/product-evolution.html">Product Evolution</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">ePO Management</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/epo-fundamentals.html" data-category="epo">ePO Fundamentals</a></li>
+                <li><a href="pages/epo-architecture.html" data-category="epo">Architecture Deep Dive</a></li>
+                <li><a href="pages/epo-deployment.html" data-category="epo">On-Premises Deployment</a></li>
+                <li><a href="pages/epo-saas.html" data-category="epo">ePO SaaS (Cloud)</a></li>
+                <li><a href="pages/epo-hybrid.html" data-category="epo">Hybrid Enterprise</a></li>
+                <li><a href="pages/epo-admin.html" data-category="epo">Administration</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Endpoint Security</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/endpoint-security.html" data-category="endpoint">ENS Fundamentals</a></li>
+                <li><a href="pages/ens-architecture.html" data-category="endpoint">ENS Architecture</a></li>
+                <li><a href="pages/ens-deployment.html" data-category="endpoint">Deployment Guide</a></li>
+                <li><a href="pages/ens-policies.html" data-category="endpoint">Policy Configuration</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">EDR / XDR</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/edr-fundamentals.html" data-category="endpoint">EDR Fundamentals</a></li>
+                <li><a href="pages/edr-architecture.html" data-category="endpoint">EDR Architecture</a></li>
+                <li><a href="pages/edr-detection.html" data-category="endpoint">Detection & Response</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Data Loss Prevention</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/dlp-fundamentals.html" data-category="dlp">DLP Fundamentals</a></li>
+                <li><a href="pages/dlp-architecture.html" data-category="dlp">DLP Architecture</a></li>
+                <li><a href="pages/dlp-policies.html" data-category="dlp">Policy Configuration</a></li>
+                <li><a href="pages/dlp-deployment.html" data-category="dlp">Deployment Guide</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Network & SIEM</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/network-security.html" data-category="network">Network Security</a></li>
+                <li><a href="pages/helix-xdr.html" data-category="siem">Helix (XDR)</a></li>
+                <li><a href="pages/esm-siem.html" data-category="siem">ESM (SIEM)</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Advanced Topics</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/tie-dxl.html" data-category="intel">Threat Intelligence</a></li>
+                <li><a href="pages/atd-sandbox.html" data-category="intel">ATD Sandbox</a></li>
+                <li><a href="pages/integrations.html">Integrations</a></li>
+                <li><a href="pages/api-automation.html">API & Automation</a></li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Troubleshooting</div>
+            <ul class="sidebar-nav">
+                <li><a href="pages/troubleshooting.html">Master Guide</a></li>
+                <li><a href="pages/troubleshoot-epo.html" data-category="epo">ePO Issues</a></li>
+                <li><a href="pages/troubleshoot-endpoint.html" data-category="endpoint">Endpoint Issues</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">Trellix Security Platform</h1>
+                <p class="hero-subtitle">
+                    Comprehensive documentation covering the complete Trellix ecosystem — from ePO management 
+                    to endpoint protection, EDR/XDR, DLP, and enterprise security operations.
+                </p>
+                <div class="hero-badges">
+                    <span class="badge epo">ePO</span>
+                    <span class="badge endpoint">ENS</span>
+                    <span class="badge endpoint">EDR</span>
+                    <span class="badge dlp">DLP</span>
+                    <span class="badge network">Network</span>
+                    <span class="badge siem">SIEM</span>
+                    <span class="badge intel">Threat Intel</span>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">40+</div>
+                    <div class="stat-label">Documentation Pages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7</div>
+                    <div class="stat-label">Product Families</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Architecture Diagrams</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2024</div>
+                    <div class="stat-label">Current Reference</div>
+                </div>
+            </section>
+
+            <!-- About Trellix Section -->
+            <section>
+                <h2>About Trellix</h2>
+                <p>
+                    <strong>Trellix</strong> was formed in 2022 from the merger of McAfee Enterprise and FireEye, 
+                    creating one of the largest pure-play cybersecurity companies. Under Symphony Technology Group 
+                    ownership, Trellix has consolidated a vast portfolio of security products into a unified XDR 
+                    (Extended Detection and Response) platform.
+                </p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 - Present</div>
+                        <div class="timeline-content">
+                            <h4>Trellix Era</h4>
+                            <p>Merger complete, XDR-focused strategy, unified product portfolio with consolidated management through ePO.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021</div>
+                        <div class="timeline-content">
+                            <h4>STG Acquisition</h4>
+                            <p>Symphony Technology Group acquires McAfee Enterprise and FireEye products. Mandiant spins off as separate company.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2017 - 2020</div>
+                        <div class="timeline-content">
+                            <h4>McAfee Enterprise / FireEye</h4>
+                            <p>McAfee spins off from Intel, private equity ownership. FireEye operates independently with Helix XDR platform.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2011 - 2016</div>
+                        <div class="timeline-content">
+                            <h4>Intel Security Era</h4>
+                            <p>Intel acquires McAfee, rebrands to Intel Security. ePO becomes core management platform for enterprise.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Portfolio Section -->
+            <section>
+                <h2>Product Portfolio</h2>
+                <p>
+                    The Trellix platform encompasses comprehensive security capabilities across endpoints, 
+                    networks, data, and cloud environments. All products integrate through the central 
+                    ePolicy Orchestrator (ePO) management console.
+                </p>
+                
+                <div class="product-grid">
+                    <!-- ePO Card -->
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🎛️</div>
+                            <h3 class="card-title">ePolicy Orchestrator (ePO)</h3>
+                        </div>
+                        <p>Centralized security management platform for all Trellix products. Provides unified policy management, reporting, and deployment capabilities.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">5.10 Update X</span>
+                            <span class="version-tag">SaaS</span>
+                        </div>
+                        <a href="pages/epo-fundamentals.html" class="btn btn-secondary mt-3">Explore ePO →</a>
+                    </div>
+                    
+                    <!-- ENS Card -->
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🛡️</div>
+                            <h3 class="card-title">Endpoint Security (ENS)</h3>
+                        </div>
+                        <p>Next-generation endpoint protection with Threat Prevention, Firewall, Web Control, and Adaptive Threat Protection modules.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">ENS 10.7+</span>
+                        </div>
+                        <a href="pages/endpoint-security.html" class="btn btn-secondary mt-3">Explore ENS →</a>
+                    </div>
+                    
+                    <!-- EDR Card -->
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🔍</div>
+                            <h3 class="card-title">EDR / XDR</h3>
+                        </div>
+                        <p>Advanced endpoint detection and response with behavioral analysis, threat hunting, and automated investigation capabilities.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">Cloud-Native</span>
+                        </div>
+                        <a href="pages/edr-fundamentals.html" class="btn btn-secondary mt-3">Explore EDR →</a>
+                    </div>
+                    
+                    <!-- DLP Card -->
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">📊</div>
+                            <h3 class="card-title">Data Loss Prevention (DLP)</h3>
+                        </div>
+                        <p>Comprehensive data protection across endpoints, network, and discovery. Content-aware policies with advanced classification.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">DLP 11.x</span>
+                        </div>
+                        <a href="pages/dlp-architecture.html" class="btn btn-secondary mt-3">Explore DLP →</a>
+                    </div>
+                    
+                    <!-- Network Security Card -->
+                    <div class="card network">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <h3 class="card-title">Network Security</h3>
+                        </div>
+                        <p>Network intrusion prevention (NSP), network detection and response (NDR), and advanced threat detection from FireEye heritage.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">NSP</span>
+                            <span class="version-tag">NDR</span>
+                        </div>
+                        <a href="pages/network-security.html" class="btn btn-secondary mt-3">Explore Network →</a>
+                    </div>
+                    
+                    <!-- SIEM Card -->
+                    <div class="card siem">
+                        <div class="card-header">
+                            <div class="card-icon">📈</div>
+                            <h3 class="card-title">SIEM & Helix XDR</h3>
+                        </div>
+                        <p>Security information and event management with cloud-native XDR platform. Unified detection, investigation, and response.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">Helix</span>
+                            <span class="version-tag">ESM</span>
+                        </div>
+                        <a href="pages/helix-xdr.html" class="btn btn-secondary mt-3">Explore SIEM →</a>
+                    </div>
+                    
+                    <!-- Threat Intel Card -->
+                    <div class="card intel">
+                        <div class="card-header">
+                            <div class="card-icon">🧠</div>
+                            <h3 class="card-title">Threat Intelligence</h3>
+                        </div>
+                        <p>Threat Intelligence Exchange (TIE), Data Exchange Layer (DXL), and Advanced Threat Defense (ATD) sandboxing.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="version-tag">TIE</span>
+                            <span class="version-tag">ATD</span>
+                        </div>
+                        <a href="pages/tie-dxl.html" class="btn btn-secondary mt-3">Explore Intel →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Naming Reference -->
+            <section>
+                <h2>Legacy to Current Naming Reference</h2>
+                <p>
+                    Understanding the product evolution helps when reviewing documentation, support articles, 
+                    and community resources that may use legacy product names.
+                </p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Legacy McAfee Name</th>
+                                <th>Legacy FireEye Name</th>
+                                <th>Current Trellix Name</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>McAfee ePO</td>
+                                <td>—</td>
+                                <td><strong>Trellix ePolicy Orchestrator</strong></td>
+                                <td><span class="badge epo">Management</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee ENS</td>
+                                <td>—</td>
+                                <td><strong>Trellix Endpoint Security</strong></td>
+                                <td><span class="badge endpoint">Endpoint</span></td>
+                            </tr>
+                            <tr>
+                                <td>MVISION EDR</td>
+                                <td>FireEye Endpoint Security</td>
+                                <td><strong>Trellix EDR</strong></td>
+                                <td><span class="badge endpoint">Detection</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee ATD</td>
+                                <td>FireEye AX/EX</td>
+                                <td><strong>Trellix Detection as a Service</strong></td>
+                                <td><span class="badge intel">Sandbox</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee Web Gateway</td>
+                                <td>—</td>
+                                <td><strong>Trellix Web Security</strong></td>
+                                <td><span class="badge network">Web</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee DLP</td>
+                                <td>—</td>
+                                <td><strong>Trellix DLP</strong></td>
+                                <td><span class="badge dlp">Data Protection</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee NSP</td>
+                                <td>FireEye NX</td>
+                                <td><strong>Trellix Network Security</strong></td>
+                                <td><span class="badge network">Network</span></td>
+                            </tr>
+                            <tr>
+                                <td>—</td>
+                                <td>FireEye Helix</td>
+                                <td><strong>Trellix Helix (XDR)</strong></td>
+                                <td><span class="badge siem">SIEM/XDR</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee SIEM (ESM)</td>
+                                <td>—</td>
+                                <td><strong>Trellix SIEM</strong></td>
+                                <td><span class="badge siem">SIEM</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee TIE/DXL</td>
+                                <td>—</td>
+                                <td><strong>Trellix Threat Intelligence Exchange</strong></td>
+                                <td><span class="badge intel">Threat Intel</span></td>
+                            </tr>
+                            <tr>
+                                <td>McAfee Application Control</td>
+                                <td>—</td>
+                                <td><strong>Trellix Application Control</strong></td>
+                                <td><span class="badge endpoint">Whitelisting</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Architecture Overview -->
+            <section>
+                <h2>Unified Architecture Overview</h2>
+                
+                <div class="ascii-diagram">
+<pre>
+TRELLIX UNIFIED ENTERPRISE ARCHITECTURE
+═══════════════════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              TRELLIX XDR PLATFORM (CLOUD)                                │
+│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐       │
+│  │   Helix XDR     │ │ Threat Intel    │ │  Detection      │ │  Response       │       │
+│  │   Console       │ │ (Mandiant)      │ │  Engine (ML/AI) │ │  Orchestration  │       │
+│  └────────┬────────┘ └────────┬────────┘ └────────┬────────┘ └────────┬────────┘       │
+│           └───────────────────┴───────────────────┴───────────────────┘                 │
+│                                          │                                               │
+│                                    Telemetry / Alerts                                    │
+└──────────────────────────────────────────┬──────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌──────────────────────────────────────────────────────────────────────────────────────────┐
+│                           ePO (MANAGEMENT PLANE)                                          │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐          │
+│  │   ENS    │ │   EDR    │ │   DLP    │ │   TIE    │ │   App    │ │  Custom  │          │
+│  │ Policies │ │  Config  │ │ Policies │ │  Config  │ │ Control  │ │ Products │          │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘          │
+│                                                                                          │
+│  ┌────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │ Agent Handlers │ Repositories │ SQL Database │ Registered Servers │ Super Agents   │ │
+│  └────────────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────┬───────────────────────────────────────────────┘
+                                           │
+          ┌────────────────────────────────┼────────────────────────────────┐
+          │                                │                                │
+          ▼                                ▼                                ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    ENDPOINTS                                             │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐   │
+│  │    Trellix   │ │    ENS       │ │    EDR       │ │    DLP       │ │ Application  │   │
+│  │    Agent     │ │   Modules    │ │   Sensor     │ │   Agent      │ │   Control    │   │
+│  │    (MA)      │ │   (ATP/FW)   │ │              │ │              │ │   (MACC)     │   │
+│  └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘   │
+│                                                                                          │
+│  Windows Workstations │ Windows Servers │ Linux │ macOS │ Virtual Machines              │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    NETWORK LAYER                                         │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐   │
+│  │     NSP      │ │     Web      │ │    Email     │ │   Network    │ │     DLP      │   │
+│  │    (IPS)     │ │   Gateway    │ │   Security   │ │  Forensics   │ │   Network    │   │
+│  └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘   │
+│                                                                                          │
+│  Inline Protection │ SSL Inspection │ Email Filtering │ TAP/SPAN Analysis │ DLP Monitor │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <!-- Quick Start Guides -->
+            <section>
+                <h2>Quick Start Guides</h2>
+                
+                <div class="accordion" data-exclusive="true">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🚀 New to Trellix? Start Here</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>If you're new to the Trellix platform, follow this recommended learning path:</p>
+                            <ol>
+                                <li><strong>ePO Fundamentals</strong> — Understand the central management platform</li>
+                                <li><strong>Agent Deployment</strong> — Learn how to deploy agents to endpoints</li>
+                                <li><strong>ENS Configuration</strong> — Configure endpoint protection policies</li>
+                                <li><strong>Reporting & Dashboards</strong> — Set up monitoring and compliance reporting</li>
+                            </ol>
+                            <a href="pages/epo-fundamentals.html" class="btn btn-primary mt-3">Start Learning →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔄 Migrating from Legacy Products?</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Migrating from VirusScan Enterprise (VSE), Symantec, or other legacy products:</p>
+                            <ul>
+                                <li><strong>VSE to ENS Migration</strong> — Upgrade path and policy conversion</li>
+                                <li><strong>Symantec DLP to Trellix DLP</strong> — Policy translation and deployment</li>
+                                <li><strong>Third-party SIEM Integration</strong> — Splunk, Sentinel, QRadar connectors</li>
+                            </ul>
+                            <a href="pages/migrations.html" class="btn btn-primary mt-3">View Migration Guides →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🏢 Enterprise Deployment Planning</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Planning a large-scale deployment (50,000+ endpoints):</p>
+                            <ul>
+                                <li><strong>Sizing Calculator</strong> — Hardware and database requirements</li>
+                                <li><strong>Distributed Architecture</strong> — Agent Handlers, repositories, and DR</li>
+                                <li><strong>Global Deployment</strong> — Multi-region, multi-site considerations</li>
+                            </ul>
+                            <a href="pages/epo-architecture.html" class="btn btn-primary mt-3">View Architecture Guide →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases Section -->
+            <section>
+                <h2>Common Use Cases</h2>
+                
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="ransomware">Ransomware Response</button>
+                        <button class="tab-button" data-tab="exfiltration">Data Exfiltration</button>
+                        <button class="tab-button" data-tab="hunting">Threat Hunting</button>
+                        <button class="tab-button" data-tab="compliance">Compliance Audit</button>
+                    </div>
+                    
+                    <div class="tab-panel active" id="ransomware">
+                        <div class="card">
+                            <h4>Ransomware Detection & Response Workflow</h4>
+                            <div class="steps">
+                                <div class="step">
+                                    <div class="step-title">ENS Threat Prevention Detection</div>
+                                    <div class="step-content">Real-time behavioral detection identifies ransomware characteristics (file encryption patterns, shadow copy deletion, lateral movement).</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">EDR Investigation</div>
+                                    <div class="step-content">Process tree analysis, file timeline, network connections traced back to initial access vector.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Automated Containment</div>
+                                    <div class="step-content">Network isolation via EDR, process termination, and automatic evidence collection.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Recovery & Hardening</div>
+                                    <div class="step-content">IOC extraction, global policy update via ePO, TIE reputation update for organization.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="exfiltration">
+                        <div class="card">
+                            <h4>Data Exfiltration Prevention Workflow</h4>
+                            <div class="steps">
+                                <div class="step">
+                                    <div class="step-title">DLP Content Detection</div>
+                                    <div class="step-content">Content fingerprinting and classification identify sensitive data in motion (email, web upload, USB).</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Policy Enforcement</div>
+                                    <div class="step-content">Block, encrypt, or quarantine based on data classification and destination.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Incident Generation</div>
+                                    <div class="step-content">Evidence captured with user justification workflow if configured.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Investigation & Remediation</div>
+                                    <div class="step-content">DLP incident manager for review, escalation, and remediation tracking.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="hunting">
+                        <div class="card">
+                            <h4>Threat Hunting Workflow</h4>
+                            <div class="steps">
+                                <div class="step">
+                                    <div class="step-title">Hypothesis Development</div>
+                                    <div class="step-content">Based on threat intelligence, MITRE ATT&CK techniques, or suspicious activity patterns.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">EDR Telemetry Query</div>
+                                    <div class="step-content">Search historical endpoint data for indicators using Helix or EDR console queries.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Correlation & Analysis</div>
+                                    <div class="step-content">Cross-reference with network data, authentication logs, and external threat intel.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Detection Rule Creation</div>
+                                    <div class="step-content">Convert successful hunts into automated detection rules deployed via ePO.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="compliance">
+                        <div class="card">
+                            <h4>Compliance Audit Workflow</h4>
+                            <div class="steps">
+                                <div class="step">
+                                    <div class="step-title">ePO Compliance Reporting</div>
+                                    <div class="step-content">Generate reports on agent health, policy compliance, and protection status across all endpoints.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">DLP Evidence Collection</div>
+                                    <div class="step-content">Export incident history with evidence for regulatory review.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Encryption Status Verification</div>
+                                    <div class="step-content">Drive encryption compliance verification via ePO queries.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Remediation Tracking</div>
+                                    <div class="step-content">Tag-based tracking of non-compliant systems with automated remediation tasks.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout Section -->
+            <section>
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">About This Documentation</div>
+                        <p>This guide was created as a comprehensive reference for security engineers deploying and managing Trellix products. Content is current as of 2024 and covers the post-merger Trellix product portfolio.</p>
+                    </div>
+                </div>
+                
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Interview Preparation</div>
+                        <p>This documentation is also designed to serve as interview preparation material for Trellix-focused security roles. Each section includes practical scenarios and troubleshooting knowledge.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer style="margin-top: var(--spacing-3xl); padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary); text-align: center; color: var(--text-muted);">
+                <p>Trellix Security Platform Documentation Guide</p>
+                <p style="font-size: 0.85rem; margin-top: var(--spacing-sm);">
+                    Created for educational and professional reference purposes.
+                    <br>Trellix, McAfee, and FireEye are trademarks of their respective owners.
+                </p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
