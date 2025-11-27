@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API & Automation - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Advanced Topics</div>
+            <ul class="sidebar-nav">
+                <li><a href="tie-dxl.html">TIE & DXL</a></li>
+                <li><a href="atd-sandbox.html">ATD Sandbox</a></li>
+                <li><a href="integrations.html">Integrations</a></li>
+                <li><a href="api-automation.html" class="active">API & Automation</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <span>API & Automation</span>
+                </div>
+                <h1>API & Automation</h1>
+                <p class="hero-subtitle">Automate Trellix operations with REST APIs, Python scripts, and SOAR playbooks.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge">Developer</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>ePO Web API</h2>
+                <p>ePO provides a comprehensive REST API for automation and integration.</p>
+
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-block-title">Authentication</span></div>
+<pre># Basic authentication
+curl -k -u "admin:password" \
+  "https://epo-server:8443/remote/core.help"
+
+# Get auth token (recommended)
+curl -k -X POST "https://epo-server:8443/remote/core.getSecurityToken" \
+  -u "admin:password"</pre>
+                </div>
+
+                <h3>Common API Commands</h3>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-block-title">ePO API Examples</span></div>
+<pre># List all systems
+curl -k -u "admin:password" \
+  "https://epo-server:8443/remote/system.find?searchText=*"
+
+# Get system details
+curl -k -u "admin:password" \
+  "https://epo-server:8443/remote/system.find?searchText=HOSTNAME"
+
+# Run query
+curl -k -u "admin:password" \
+  "https://epo-server:8443/remote/core.executeQuery?target=EPOLeafNode&select=(select EPOLeafNode.NodeName)"
+
+# Wake up agent
+curl -k -u "admin:password" \
+  "https://epo-server:8443/remote/system.wakeupAgent?names=HOSTNAME"
+
+# Run client task
+curl -k -u "admin:password" \
+  "https://epo-server:8443/remote/clienttask.run?names=HOSTNAME&taskId=123"</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Python Automation</h2>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-block-title">Python ePO Client</span></div>
+<pre>import requests
+from requests.auth import HTTPBasicAuth
+
+class EPOClient:
+    def __init__(self, server, username, password):
+        self.base_url = f"https://{server}:8443/remote"
+        self.auth = HTTPBasicAuth(username, password)
+        self.session = requests.Session()
+        self.session.verify = False  # For self-signed certs
+    
+    def execute(self, command, **params):
+        url = f"{self.base_url}/{command}"
+        params['output'] = 'json'
+        response = self.session.get(url, auth=self.auth, params=params)
+        return response.json()
+    
+    def find_systems(self, search_text="*"):
+        return self.execute("system.find", searchText=search_text)
+    
+    def wake_agent(self, hostname):
+        return self.execute("system.wakeupAgent", names=hostname)
+    
+    def run_task(self, hostname, task_id):
+        return self.execute("clienttask.run", names=hostname, taskId=task_id)
+
+# Usage
+epo = EPOClient("epo.company.com", "admin", "password")
+systems = epo.find_systems("workstation*")
+print(f"Found {len(systems)} systems")</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>EDR API</h2>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-block-title">EDR REST API</span></div>
+<pre># Get OAuth token
+curl -X POST "https://api.trellix.com/iam/v1.0/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=client_credentials&client_id=XXX&client_secret=YYY&scope=edr.r edr.w"
+
+# Search threats
+curl -X GET "https://api.trellix.com/edr/v2/threats" \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json"
+
+# Isolate host
+curl -X POST "https://api.trellix.com/edr/v2/hosts/{hostId}/isolate" \
+  -H "Authorization: Bearer {token}"</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Automation Use Cases</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Use Case</th><th>API/Method</th><th>Benefit</th></tr></thead>
+                        <tbody>
+                            <tr><td>Auto-isolate compromised hosts</td><td>EDR API</td><td>Faster containment</td></tr>
+                            <tr><td>Bulk deploy patches</td><td>ePO client task API</td><td>Scheduled remediation</td></tr>
+                            <tr><td>Report generation</td><td>ePO query API</td><td>Automated compliance</td></tr>
+                            <tr><td>IOC scanning</td><td>TIE/DXL API</td><td>Threat hunting</td></tr>
+                            <tr><td>CMDB sync</td><td>ePO system API</td><td>Asset accuracy</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="integrations.html" class="btn btn-ghost">← Integrations</a>
+                <a href="migrations.html" class="btn btn-primary">Migrations →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

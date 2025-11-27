@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATD Sandbox - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Advanced Topics</div>
+            <ul class="sidebar-nav">
+                <li><a href="tie-dxl.html">TIE & DXL</a></li>
+                <li><a href="atd-sandbox.html" class="active">ATD Sandbox</a></li>
+                <li><a href="integrations.html">Integrations</a></li>
+                <li><a href="api-automation.html">API & Automation</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <span>ATD Sandbox</span>
+                </div>
+                <h1>Advanced Threat Defense (ATD)</h1>
+                <p class="hero-subtitle">On-premises malware sandbox for deep file analysis and zero-day threat detection.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge">Advanced</span></span>
+                    <span class="page-meta-item">📖 15 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>ATD Overview</h2>
+                <p>
+                    <strong>Trellix ATD</strong> is an on-premises sandboxing solution that analyzes suspicious files 
+                    in isolated virtual environments. It detects malware, zero-day exploits, and advanced threats 
+                    through behavioral analysis.
+                </p>
+
+                <div class="ascii-diagram">
+<pre>
+ATD ANALYSIS PIPELINE
+══════════════════════════════════════════════════════════════════════════════
+
+Suspicious File
+      │
+      ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              ATD APPLIANCE                                   │
+│                                                                              │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌────────────┐│
+│  │   Static     │    │   Dynamic    │    │   Network    │    │   Report   ││
+│  │   Analysis   │───►│   Analysis   │───►│   Analysis   │───►│ Generation ││
+│  │              │    │              │    │              │    │            ││
+│  │ • File type  │    │ • Execute in │    │ • C2 comms   │    │ • Verdict  ││
+│  │ • Strings    │    │   sandbox VM │    │ • DNS        │    │ • IOCs     ││
+│  │ • Headers    │    │ • API calls  │    │ • Downloads  │    │ • MITRE    ││
+│  │ • Signatures │    │ • Registry   │    │ • Exfil      │    │ • Timeline ││
+│  └──────────────┘    └──────────────┘    └──────────────┘    └────────────┘│
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+      │
+      ▼
+┌───────────────────────────────────────┐
+│  Update TIE with verdict & IOCs       │
+│  Share across all endpoints instantly │
+└───────────────────────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Analysis Capabilities</h2>
+                <div class="product-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📄</div>
+                            <h4 class="card-title">File Types</h4>
+                        </div>
+                        <p>PE files, Office docs, PDFs, scripts, archives, Java, Flash, and more.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🖥️</div>
+                            <h4 class="card-title">Custom VMs</h4>
+                        </div>
+                        <p>Create analyzer VMs matching your environment (OS, apps, patches).</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔬</div>
+                            <h4 class="card-title">Deep Inspection</h4>
+                        </div>
+                        <p>Memory forensics, API hooking, process injection detection.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <h4 class="card-title">Network Simulation</h4>
+                        </div>
+                        <p>Simulated internet for C2 communication analysis.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Integration Points</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Source</th><th>Integration</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>ENS/ATP</strong></td><td>Unknown files sent automatically for analysis</td></tr>
+                            <tr><td><strong>Email Gateway</strong></td><td>Attachments analyzed before delivery</td></tr>
+                            <tr><td><strong>Web Gateway</strong></td><td>Downloads analyzed in real-time</td></tr>
+                            <tr><td><strong>Network IPS</strong></td><td>Files extracted from network traffic</td></tr>
+                            <tr><td><strong>TIE</strong></td><td>Verdicts shared across ecosystem</td></tr>
+                            <tr><td><strong>REST API</strong></td><td>Manual submission and verdict retrieval</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>API Submission</h2>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-block-title">Submit File via API</span></div>
+<pre># Submit file for analysis
+curl -X POST https://atd-server/php/fileupload.php \
+  -H "VE-SDK-API: {session_id}" \
+  -F "file=@suspicious.exe" \
+  -F "data={\"submitType\":\"0\",\"analysisProfile\":\"1\"}"
+
+# Check analysis status
+curl -X GET "https://atd-server/php/samplestatus.php?id=12345" \
+  -H "VE-SDK-API: {session_id}"
+
+# Get report
+curl -X GET "https://atd-server/php/showreport.php?id=12345&type=json" \
+  -H "VE-SDK-API: {session_id}"</pre>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="tie-dxl.html" class="btn btn-ghost">← TIE & DXL</a>
+                <a href="integrations.html" class="btn btn-primary">Integrations →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLP Fundamentals - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html" class="active">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Data Loss Prevention</div>
+            <ul class="sidebar-nav">
+                <li><a href="dlp-fundamentals.html" data-category="dlp" class="active">DLP Fundamentals</a></li>
+                <li><a href="dlp-architecture.html" data-category="dlp">DLP Architecture</a></li>
+                <li><a href="dlp-policies.html" data-category="dlp">Policy Configuration</a></li>
+                <li><a href="dlp-deployment.html" data-category="dlp">Deployment Guide</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span>DLP Fundamentals</span>
+                </div>
+                <h1>DLP Fundamentals</h1>
+                <p class="hero-subtitle">Core concepts of Data Loss Prevention and data protection strategies.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge dlp">DLP</span></span>
+                    <span class="page-meta-item">📖 15 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>What is DLP?</h2>
+                
+                <p>
+                    <strong>Data Loss Prevention (DLP)</strong> is a set of technologies and processes that 
+                    identify, monitor, and protect sensitive data from unauthorized access, use, or transfer. 
+                    DLP helps organizations prevent data breaches and comply with regulations.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">📍</div>
+                        <div class="stat-label">Data at Rest</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Data stored on servers, databases, and cloud storage</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">🔄</div>
+                        <div class="stat-label">Data in Motion</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Data moving across network, email, web uploads</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">💻</div>
+                        <div class="stat-label">Data in Use</div>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">Data being accessed on endpoints - copy, print, USB</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Why DLP Matters</h2>
+
+                <div class="product-grid">
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">📋</div>
+                            <h4 class="card-title">Compliance</h4>
+                        </div>
+                        <p>Meet regulatory requirements: PCI-DSS, HIPAA, GDPR, PIPEDA, SOX, and industry-specific mandates.</p>
+                    </div>
+                    
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">🛡️</div>
+                            <h4 class="card-title">IP Protection</h4>
+                        </div>
+                        <p>Protect intellectual property, trade secrets, and competitive information from theft.</p>
+                    </div>
+                    
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">👁️</div>
+                            <h4 class="card-title">Visibility</h4>
+                        </div>
+                        <p>Understand where sensitive data lives, how it moves, and who accesses it.</p>
+                    </div>
+                    
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">🚫</div>
+                            <h4 class="card-title">Breach Prevention</h4>
+                        </div>
+                        <p>Stop accidental or malicious data exfiltration before it happens.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Data Classification</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Description</th>
+                                <th>Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pattern Matching</strong></td>
+                                <td>Regular expressions for structured data</td>
+                                <td>SSN, Credit Cards, SIN</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Keywords</strong></td>
+                                <td>Dictionary-based detection</td>
+                                <td>Confidential, Internal Only</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fingerprinting</strong></td>
+                                <td>Register known sensitive documents</td>
+                                <td>Contracts, M&A docs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ML Classification</strong></td>
+                                <td>Machine learning categorization</td>
+                                <td>Financial docs, PII documents</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>DLP Deployment Approach</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Discover</div>
+                        <div class="step-content">Scan repositories to find where sensitive data exists. Build data inventory.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Monitor</div>
+                        <div class="step-content">Deploy in monitor-only mode. Observe data flows without blocking.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Tune</div>
+                        <div class="step-content">Refine policies to reduce false positives. Adjust classifications.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Enforce</div>
+                        <div class="step-content">Enable blocking actions. Implement user notifications.</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="edr-detection.html" class="btn btn-ghost">← EDR Detection</a>
+                <a href="dlp-architecture.html" class="btn btn-primary">DLP Architecture →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

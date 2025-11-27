@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ePO SaaS - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html" class="active">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">ePO Management</div>
+            <ul class="sidebar-nav">
+                <li><a href="epo-fundamentals.html" data-category="epo">Fundamentals</a></li>
+                <li><a href="epo-architecture.html" data-category="epo">Architecture</a></li>
+                <li><a href="epo-deployment.html" data-category="epo">Deployment Guide</a></li>
+                <li><a href="epo-saas.html" data-category="epo" class="active">ePO SaaS</a></li>
+                <li><a href="epo-hybrid.html" data-category="epo">Hybrid Deployment</a></li>
+                <li><a href="epo-admin.html" data-category="epo">Administration</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">On This Page</div>
+            <ul class="sidebar-nav">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#onboarding">Onboarding</a></li>
+                <li><a href="#limitations">Limitations</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="epo-fundamentals.html">ePO</a>
+                    <span class="separator">/</span>
+                    <span>ePO SaaS</span>
+                </div>
+                <h1>Trellix ePO SaaS</h1>
+                <p class="hero-subtitle">Cloud-hosted ePolicy Orchestrator for simplified management without on-premises infrastructure.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge epo">ePO</span></span>
+                    <span class="page-meta-item"><span class="badge">Cloud</span></span>
+                    <span class="page-meta-item">📖 15 min read</span>
+                </div>
+            </div>
+
+            <section id="overview">
+                <h2>What is ePO SaaS?</h2>
+                
+                <p>
+                    <strong>Trellix ePO SaaS</strong> (formerly MVISION ePO) is a cloud-hosted version of ePolicy 
+                    Orchestrator. Trellix manages the infrastructure while you focus on security policy and 
+                    endpoint management.
+                </p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Product Naming</div>
+                        <p>ePO SaaS was previously known as MVISION ePO and McAfee ePO Cloud. All refer to the same cloud-hosted management platform.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="benefits">
+                <h2>Benefits of ePO SaaS</h2>
+
+                <div class="product-grid">
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">☁️</div>
+                            <h4 class="card-title">No Infrastructure</h4>
+                        </div>
+                        <p>No servers to provision, maintain, or upgrade. Trellix handles all infrastructure management.</p>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <h4 class="card-title">Auto Updates</h4>
+                        </div>
+                        <p>Platform updates and patches applied automatically by Trellix without downtime.</p>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">📈</div>
+                            <h4 class="card-title">Elastic Scale</h4>
+                        </div>
+                        <p>Automatically scales to support growing endpoint counts without capacity planning.</p>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🌍</div>
+                            <h4 class="card-title">Global Access</h4>
+                        </div>
+                        <p>Access console from anywhere. Ideal for distributed workforces and remote management.</p>
+                    </div>
+                </div>
+
+                <h3>On-Premises vs SaaS Comparison</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>ePO On-Premises</th>
+                                <th>ePO SaaS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Infrastructure</td>
+                                <td>Customer managed</td>
+                                <td>Trellix managed</td>
+                            </tr>
+                            <tr>
+                                <td>Updates</td>
+                                <td>Manual upgrade process</td>
+                                <td>Automatic</td>
+                            </tr>
+                            <tr>
+                                <td>Database</td>
+                                <td>Customer SQL Server</td>
+                                <td>Trellix managed</td>
+                            </tr>
+                            <tr>
+                                <td>Agent Handlers</td>
+                                <td>Customer deployed</td>
+                                <td>Optional (hybrid mode)</td>
+                            </tr>
+                            <tr>
+                                <td>Customization</td>
+                                <td>Full SQL/API access</td>
+                                <td>Limited to UI/API</td>
+                            </tr>
+                            <tr>
+                                <td>Data Residency</td>
+                                <td>On-premises</td>
+                                <td>Trellix cloud (regional)</td>
+                            </tr>
+                            <tr>
+                                <td>Network DLP</td>
+                                <td>Supported</td>
+                                <td>Limited support</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>ePO SaaS Architecture</h2>
+
+                <div class="ascii-diagram epo">
+<pre>
+ePO SAAS ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════
+
+                           TRELLIX CLOUD
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   ┌────────────────────────────────────────────────────────────────────┐    │
+│   │                        ePO SaaS CONSOLE                            │    │
+│   │                                                                     │    │
+│   │   • Policy Management          • Reporting & Dashboards            │    │
+│   │   • System Tree                • Software Deployment               │    │
+│   │   • Incident Management        • Compliance Monitoring             │    │
+│   │                                                                     │    │
+│   └────────────────────────────────────────────────────────────────────┘    │
+│                                      │                                       │
+│   ┌────────────────────────────────────────────────────────────────────┐    │
+│   │                      CLOUD AGENT HANDLERS                          │    │
+│   │                                                                     │    │
+│   │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐               │    │
+│   │   │  Americas   │  │    EMEA     │  │    APAC     │               │    │
+│   │   │  Region     │  │   Region    │  │   Region    │               │    │
+│   │   └─────────────┘  └─────────────┘  └─────────────┘               │    │
+│   │                                                                     │    │
+│   └────────────────────────────────────────────────────────────────────┘    │
+│                                                                              │
+│   ┌────────────────────────────────────────────────────────────────────┐    │
+│   │                      CLOUD REPOSITORIES                            │    │
+│   │                                                                     │    │
+│   │   • DAT Updates              • Product Packages                    │    │
+│   │   • Engine Updates           • Content Updates                     │    │
+│   │                                                                     │    │
+│   └────────────────────────────────────────────────────────────────────┘    │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      │ HTTPS :443
+                                      │
+          ┌───────────────────────────┼───────────────────────────┐
+          │                           │                           │
+          ▼                           ▼                           ▼
+┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
+│   CORPORATE      │      │    REMOTE        │      │    BRANCH        │
+│   ENDPOINTS      │      │    WORKERS       │      │    OFFICE        │
+│                  │      │                  │      │                  │
+│  Direct cloud    │      │  Direct cloud    │      │  Optional local  │
+│  communication   │      │  communication   │      │  Agent Handler   │
+│                  │      │                  │      │                  │
+└──────────────────┘      └──────────────────┘      └──────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <section id="onboarding">
+                <h2>Onboarding to ePO SaaS</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Provision Tenant</div>
+                        <div class="step-content">
+                            <p>Work with Trellix sales/support to provision your ePO SaaS tenant. You'll receive:</p>
+                            <ul>
+                                <li>Tenant URL (e.g., company.manage.trellix.com)</li>
+                                <li>Initial admin credentials</li>
+                                <li>License entitlements</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Configure Identity</div>
+                        <div class="step-content">
+                            <p>Set up user authentication:</p>
+                            <ul>
+                                <li>Configure SSO with your IdP (Azure AD, Okta, etc.)</li>
+                                <li>Set up MFA requirements</li>
+                                <li>Create admin roles and permissions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Deploy Agents</div>
+                        <div class="step-content">
+                            <p>Generate agent installation package from ePO SaaS console:</p>
+                            <ul>
+                                <li>Download FramePkg installer</li>
+                                <li>Package includes cloud connection settings</li>
+                                <li>Deploy via SCCM, Intune, GPO, or manual</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-title">Configure Policies</div>
+                        <div class="step-content">
+                            <p>Set up security policies for your endpoints:</p>
+                            <ul>
+                                <li>Import existing policies (if migrating)</li>
+                                <li>Configure ENS policies</li>
+                                <li>Set up DLP rules (if applicable)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="limitations">
+                <h2>Limitations & Considerations</h2>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">SaaS Limitations</div>
+                        <p>Understand these limitations before choosing ePO SaaS over on-premises deployment.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔌 No Direct Database Access</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Cannot run custom SQL queries or access the database directly. Reporting limited to built-in reports and API exports.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🌐 Internet Connectivity Required</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Endpoints must have internet access to communicate with ePO SaaS. Air-gapped environments require on-premises ePO.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>📦 Limited Product Support</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Not all Trellix products support ePO SaaS management. Network DLP and some legacy products require on-premises ePO.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🗄️ Data Residency</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Data stored in Trellix cloud infrastructure. Consider regulatory requirements (GDPR, data sovereignty) when choosing regions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="epo-deployment.html" class="btn btn-ghost">← ePO Deployment</a>
+                <a href="epo-hybrid.html" class="btn btn-primary">Hybrid Deployment →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

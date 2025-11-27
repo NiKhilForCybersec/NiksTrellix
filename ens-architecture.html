@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENS Architecture - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html" class="active">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Endpoint Security</div>
+            <ul class="sidebar-nav">
+                <li><a href="endpoint-security.html" data-category="endpoint">ENS Fundamentals</a></li>
+                <li><a href="ens-architecture.html" data-category="endpoint" class="active">ENS Architecture</a></li>
+                <li><a href="ens-deployment.html" data-category="endpoint">Deployment Guide</a></li>
+                <li><a href="ens-policies.html" data-category="endpoint">Policy Configuration</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="endpoint-security.html">Endpoint Security</a>
+                    <span class="separator">/</span>
+                    <span>Architecture</span>
+                </div>
+                <h1>ENS Architecture Deep Dive</h1>
+                <p class="hero-subtitle">Technical architecture of Trellix Endpoint Security including services, drivers, and content components.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge endpoint">Endpoint</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>Component Stack</h2>
+
+                <div class="ascii-diagram endpoint">
+<pre>
+ENS COMPONENT STACK
+══════════════════════════════════════════════════════════════════════════════
+
+USER MODE
+─────────────────────────────────────────────────────────────────────────────
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  SERVICES                                                                    │
+│                                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
+│  │   mfetp.exe  │  │  mfefwc.exe  │  │   mfewc.exe  │  │  mfeatp.exe  │    │
+│  │   Threat     │  │   Firewall   │  │     Web      │  │     ATP      │    │
+│  │  Prevention  │  │    Core      │  │   Control    │  │   Service    │    │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘    │
+│                                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐                       │
+│  │  McAPExe.exe │  │  mfemms.exe  │  │ mfemactl.exe │                       │
+│  │    Access    │  │    Module    │  │    Mgmt      │                       │
+│  │  Protection  │  │   Manager    │  │   Control    │                       │
+│  └──────────────┘  └──────────────┘  └──────────────┘                       │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  SCANNING ENGINE (AMCore)                                                    │
+│                                                                              │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │   • Signature Scanning        • Heuristic Analysis                  │    │
+│  │   • Generic Detection         • Archive Handling                    │    │
+│  │   • MIME Parsing              • Decompression                       │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+KERNEL MODE
+─────────────────────────────────────────────────────────────────────────────
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  FILTER DRIVERS                                                              │
+│                                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
+│  │ mfehidk.sys  │  │ mfeavfk.sys  │  │mfefirek.sys  │  │mfencbdc.sys  │    │
+│  │ File System  │  │  Anti-Virus  │  │   Firewall   │  │   Network    │    │
+│  │   Filter     │  │   Filter     │  │   Filter     │  │   Filter     │    │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘    │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+CONTENT
+─────────────────────────────────────────────────────────────────────────────
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
+│  │  DAT Files   │  │   Engine     │  │   Exploit    │  │     GTI      │    │
+│  │ (Signatures) │  │  (AMCore)    │  │ Prevention   │  │   Queries    │    │
+│  │              │  │              │  │    Rules     │  │              │    │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘    │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Services Detail</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Display Name</th>
+                                <th>Function</th>
+                                <th>Dependencies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>mfetp</code></td>
+                                <td>McAfee Endpoint Security Threat Prevention</td>
+                                <td>On-access scanning, exploit prevention</td>
+                                <td>mfemms</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfefwc</code></td>
+                                <td>McAfee Endpoint Security Firewall Core</td>
+                                <td>Firewall rule enforcement</td>
+                                <td>mfemms</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfewc</code></td>
+                                <td>McAfee Endpoint Security Web Control</td>
+                                <td>URL filtering, web reputation</td>
+                                <td>mfemms</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfeatp</code></td>
+                                <td>McAfee Endpoint Security ATP</td>
+                                <td>Real Protect ML, DAC</td>
+                                <td>mfemms, mfetp</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfemms</code></td>
+                                <td>McAfee Module Manager Service</td>
+                                <td>Module orchestration</td>
+                                <td>McAfee Agent</td>
+                            </tr>
+                            <tr>
+                                <td><code>McAPExe</code></td>
+                                <td>McAfee Access Protection</td>
+                                <td>Self-protection, access rules</td>
+                                <td>mfemms</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Check ENS Services</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre># PowerShell - Check all ENS services
+Get-Service -Name mfe* | Select-Object Name, Status, StartType
+
+# Check specific service
+sc query mfetp
+
+# Restart Threat Prevention
+Restart-Service mfetp -Force</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Kernel Drivers</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Driver</th>
+                                <th>Type</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>mfehidk.sys</code></td>
+                                <td>File System Minifilter</td>
+                                <td>Intercepts file operations for scanning</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfeavfk.sys</code></td>
+                                <td>File System Filter</td>
+                                <td>Anti-virus file filtering</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfefirek.sys</code></td>
+                                <td>NDIS Filter</td>
+                                <td>Firewall packet inspection</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfencbdc.sys</code></td>
+                                <td>Network Filter</td>
+                                <td>Network connection monitoring</td>
+                            </tr>
+                            <tr>
+                                <td><code>mfewfpk.sys</code></td>
+                                <td>WFP Callout</td>
+                                <td>Windows Filtering Platform integration</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Content Updates</h2>
+
+                <div class="card endpoint">
+                    <h4>DAT File Components</h4>
+                    <ul>
+                        <li><strong>avvdat.ini</strong> — DAT version information</li>
+                        <li><strong>avvscan.dat</strong> — Virus signatures</li>
+                        <li><strong>avvnames.dat</strong> — Threat names database</li>
+                        <li><strong>avvclean.dat</strong> — Cleaning routines</li>
+                    </ul>
+                    <p><strong>Update Frequency:</strong> Daily (sometimes multiple times for zero-day threats)</p>
+                    <p><strong>Location:</strong> <code>C:\Program Files\Common Files\McAfee\Engine\content</code></p>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Check DAT Version</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre># Registry query
+reg query "HKLM\SOFTWARE\McAfee\AVEngine" /v AVDatVersion
+
+# Or check via cmdagent
+cmdagent.exe -i | findstr DAT</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>File Locations</h2>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Key ENS Directories</span>
+                    </div>
+<pre># Program Files
+C:\Program Files\McAfee\Endpoint Security\
+├── Threat Prevention\
+├── Firewall\
+├── Web Control\
+└── Adaptive Threat Protection\
+
+# Common Components
+C:\Program Files\Common Files\McAfee\
+├── Engine\              # Scan engine
+├── SystemCore\          # Core platform
+└── AMContent\           # Content files
+
+# Data & Logs
+C:\ProgramData\McAfee\Endpoint Security\
+├── Logs\                # All ENS logs
+├── Quarantine\          # Quarantined files
+└── Platform\            # Platform data
+
+# Quarantine
+C:\Quarantine\           # Quarantined malware</pre>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="endpoint-security.html" class="btn btn-ghost">← ENS Fundamentals</a>
+                <a href="ens-deployment.html" class="btn btn-primary">Deployment Guide →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

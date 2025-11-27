@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ePO Hybrid Deployment - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html" class="active">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">ePO Management</div>
+            <ul class="sidebar-nav">
+                <li><a href="epo-fundamentals.html" data-category="epo">Fundamentals</a></li>
+                <li><a href="epo-architecture.html" data-category="epo">Architecture</a></li>
+                <li><a href="epo-deployment.html" data-category="epo">Deployment Guide</a></li>
+                <li><a href="epo-saas.html" data-category="epo">ePO SaaS</a></li>
+                <li><a href="epo-hybrid.html" data-category="epo" class="active">Hybrid Deployment</a></li>
+                <li><a href="epo-admin.html" data-category="epo">Administration</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="epo-fundamentals.html">ePO</a>
+                    <span class="separator">/</span>
+                    <span>Hybrid Deployment</span>
+                </div>
+                <h1>ePO Hybrid Deployment</h1>
+                <p class="hero-subtitle">Combine on-premises agent handlers with ePO SaaS for optimized bandwidth and local resilience.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge epo">ePO</span></span>
+                    <span class="page-meta-item"><span class="badge">Hybrid</span></span>
+                    <span class="page-meta-item">📖 15 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>What is Hybrid Deployment?</h2>
+                
+                <p>
+                    <strong>Hybrid deployment</strong> combines ePO SaaS cloud management with on-premises 
+                    agent handlers. This provides the benefits of cloud management while maintaining local 
+                    infrastructure for bandwidth optimization and resilience.
+                </p>
+
+                <div class="ascii-diagram epo">
+<pre>
+HYBRID DEPLOYMENT ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════
+
+                              TRELLIX CLOUD
+┌────────────────────────────────────────────────────────────────────────────┐
+│                                                                            │
+│   ┌──────────────────────────────────────────────────────────────────┐    │
+│   │                        ePO SaaS CONSOLE                          │    │
+│   │                                                                   │    │
+│   │   • Central Policy Management     • Cloud Reporting              │    │
+│   │   • Global System Tree            • Threat Intelligence          │    │
+│   │                                                                   │    │
+│   └──────────────────────────────────────────────────────────────────┘    │
+│                                      │                                     │
+│                                      │ Policy Sync                         │
+│                                      ▼                                     │
+│   ┌──────────────────────────────────────────────────────────────────┐    │
+│   │                     CLOUD REPOSITORIES                           │    │
+│   └──────────────────────────────────────────────────────────────────┘    │
+│                                                                            │
+└──────────────────────────────────────────────────────────────────────────┬─┘
+                                                                           │
+         ┌──────────────────────────┬──────────────────────────┬───────────┘
+         │                          │                          │
+         ▼                          ▼                          ▼
+┌─────────────────────┐  ┌─────────────────────┐  ┌─────────────────────┐
+│   HEADQUARTERS      │  │    EMEA OFFICE      │  │    APAC OFFICE      │
+│                     │  │                     │  │                     │
+│ ┌─────────────────┐ │  │ ┌─────────────────┐ │  │ ┌─────────────────┐ │
+│ │  On-Prem Agent  │ │  │ │  On-Prem Agent  │ │  │ │  On-Prem Agent  │ │
+│ │    Handler      │ │  │ │    Handler      │ │  │ │    Handler      │ │
+│ └────────┬────────┘ │  │ └────────┬────────┘ │  │ └────────┬────────┘ │
+│          │          │  │          │          │  │          │          │
+│ ┌─────────────────┐ │  │ ┌─────────────────┐ │  │ ┌─────────────────┐ │
+│ │  Local Distrib  │ │  │ │  Local Distrib  │ │  │ │  Local Distrib  │ │
+│ │   Repository    │ │  │ │   Repository    │ │  │ │   Repository    │ │
+│ └─────────────────┘ │  │ └─────────────────┘ │  │ └─────────────────┘ │
+│          │          │  │          │          │  │          │          │
+│   ┌──────┴──────┐   │  │   ┌──────┴──────┐   │  │   ┌──────┴──────┐   │
+│   │  Endpoints  │   │  │   │  Endpoints  │   │  │   │  Endpoints  │   │
+│   │   (5,000)   │   │  │   │   (2,000)   │   │  │   │   (3,000)   │   │
+│   └─────────────┘   │  │   └─────────────┘   │  │   └─────────────┘   │
+│                     │  │                     │  │                     │
+└─────────────────────┘  └─────────────────────┘  └─────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Use Cases for Hybrid</h2>
+
+                <div class="product-grid">
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <h4 class="card-title">WAN Bandwidth</h4>
+                        </div>
+                        <p>Local repositories reduce internet bandwidth for updates. Endpoints pull DATs locally instead of from cloud.</p>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <h4 class="card-title">Local Resilience</h4>
+                        </div>
+                        <p>Endpoints continue to receive updates and check-in even if internet connectivity is lost temporarily.</p>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <h4 class="card-title">Low Latency</h4>
+                        </div>
+                        <p>Faster agent communication with local handlers. Important for time-sensitive wake-up calls and policy pushes.</p>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🏢</div>
+                            <h4 class="card-title">Legacy Support</h4>
+                        </div>
+                        <p>Support legacy products that require on-premises components while managing modern endpoints via cloud.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Deployment Steps</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Configure ePO SaaS</div>
+                        <div class="step-content">Set up your ePO SaaS tenant and configure base policies.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Deploy On-Prem Handlers</div>
+                        <div class="step-content">Install agent handlers at each site. Register them with ePO SaaS.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Configure Repositories</div>
+                        <div class="step-content">Set up distributed repositories at each site to cache updates locally.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Deploy Agents</div>
+                        <div class="step-content">Install agents pointing to local handlers. Configure fallback to cloud handlers.</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="epo-saas.html" class="btn btn-ghost">← ePO SaaS</a>
+                <a href="epo-admin.html" class="btn btn-primary">Administration →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

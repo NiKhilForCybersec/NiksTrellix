@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLP Policies - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html" class="active">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Data Loss Prevention</div>
+            <ul class="sidebar-nav">
+                <li><a href="dlp-fundamentals.html" data-category="dlp">DLP Fundamentals</a></li>
+                <li><a href="dlp-architecture.html" data-category="dlp">DLP Architecture</a></li>
+                <li><a href="dlp-policies.html" data-category="dlp" class="active">Policy Configuration</a></li>
+                <li><a href="dlp-deployment.html" data-category="dlp">Deployment Guide</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <a href="dlp-fundamentals.html">DLP</a><span class="separator">/</span>
+                    <span>Policies</span>
+                </div>
+                <h1>DLP Policy Configuration</h1>
+                <p class="hero-subtitle">Create and manage data protection policies for endpoints and network.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge dlp">DLP</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>Policy Structure</h2>
+                <div class="ascii-diagram dlp">
+<pre>
+DLP POLICY STRUCTURE
+══════════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────────┐
+│                        DLP POLICY                                │
+├─────────────────────────────────────────────────────────────────┤
+│  Classification Definition                                       │
+│  └── What data to protect (regex, keywords, fingerprints)       │
+├─────────────────────────────────────────────────────────────────┤
+│  Rule                                                            │
+│  ├── Channel (USB, Email, Web, Print, etc.)                     │
+│  ├── Condition (Classification + Context)                       │
+│  └── Reaction (Block, Monitor, Encrypt, Justify)                │
+├─────────────────────────────────────────────────────────────────┤
+│  Exceptions                                                      │
+│  └── Users, groups, applications to exclude                     │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Classification Definitions</h2>
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <button class="accordion-header"><span>Credit Card Numbers (PCI)</span><span class="accordion-icon">▼</span></button>
+                        <div class="accordion-content">
+                            <div class="code-block">
+                                <div class="code-block-header"><span class="code-block-title">Regex Pattern</span></div>
+<pre>\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})\b</pre>
+                            </div>
+                            <p>Add Luhn algorithm validation for accuracy.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header"><span>Canadian SIN</span><span class="accordion-icon">▼</span></button>
+                        <div class="accordion-content">
+                            <div class="code-block">
+                                <div class="code-block-header"><span class="code-block-title">Regex Pattern</span></div>
+<pre>\b\d{3}[-\s]?\d{3}[-\s]?\d{3}\b</pre>
+                            </div>
+                            <p>Combine with keywords: "SIN", "Social Insurance", "Insurance Number"</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Reaction Types</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Reaction</th><th>Description</th><th>User Experience</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Monitor</strong></td><td>Log only, no blocking</td><td>Transparent</td></tr>
+                            <tr><td><strong>Block</strong></td><td>Prevent action entirely</td><td>Action denied message</td></tr>
+                            <tr><td><strong>Justify</strong></td><td>User must provide reason</td><td>Popup requiring justification</td></tr>
+                            <tr><td><strong>Encrypt</strong></td><td>Auto-encrypt before transfer</td><td>May require password</td></tr>
+                            <tr><td><strong>Notify</strong></td><td>Alert user and/or admin</td><td>Warning notification</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Policy Development</div>
+                        <ul>
+                            <li>Start in Monitor mode before enabling blocking</li>
+                            <li>Test with sample data before production deployment</li>
+                            <li>Use multiple classification methods together</li>
+                            <li>Create exceptions for legitimate business processes</li>
+                            <li>Review incidents regularly and tune policies</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="dlp-architecture.html" class="btn btn-ghost">← DLP Architecture</a>
+                <a href="dlp-deployment.html" class="btn btn-primary">Deployment Guide →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

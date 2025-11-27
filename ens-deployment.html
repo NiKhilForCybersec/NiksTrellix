@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENS Deployment - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html" class="active">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Endpoint Security</div>
+            <ul class="sidebar-nav">
+                <li><a href="endpoint-security.html" data-category="endpoint">ENS Fundamentals</a></li>
+                <li><a href="ens-architecture.html" data-category="endpoint">ENS Architecture</a></li>
+                <li><a href="ens-deployment.html" data-category="endpoint" class="active">Deployment Guide</a></li>
+                <li><a href="ens-policies.html" data-category="endpoint">Policy Configuration</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="endpoint-security.html">Endpoint Security</a>
+                    <span class="separator">/</span>
+                    <span>Deployment</span>
+                </div>
+                <h1>ENS Deployment Guide</h1>
+                <p class="hero-subtitle">Step-by-step deployment of Trellix Endpoint Security across your organization.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge endpoint">Endpoint</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>Deployment Prerequisites</h2>
+
+                <div class="card endpoint">
+                    <h4>System Requirements</h4>
+                    <ul>
+                        <li><strong>OS:</strong> Windows 10/11, Windows Server 2016+, macOS 10.15+, Linux (RHEL, Ubuntu)</li>
+                        <li><strong>RAM:</strong> 2 GB minimum (4 GB recommended)</li>
+                        <li><strong>Disk:</strong> 2 GB free space</li>
+                        <li><strong>Agent:</strong> McAfee Agent 5.7.x or later</li>
+                    </ul>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Remove Competing AV</div>
+                        <p>Uninstall existing antivirus software before deploying ENS to prevent conflicts and performance issues.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Deployment Methods</h2>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="epo-deploy">ePO Deployment</button>
+                        <button class="tab-button" data-tab="standalone">Standalone</button>
+                        <button class="tab-button" data-tab="sccm">SCCM/Intune</button>
+                    </div>
+
+                    <div class="tab-panel active" id="epo-deploy">
+                        <div class="card">
+                            <h4>Deploy via ePO</h4>
+                            <div class="steps">
+                                <div class="step">
+                                    <div class="step-title">Check In Packages</div>
+                                    <div class="step-content">Menu → Software → Check In Package. Check in all ENS modules.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Create Deployment Task</div>
+                                    <div class="step-content">Client Tasks → New Task → Product Deployment. Select ENS modules.</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Assign to Systems</div>
+                                    <div class="step-content">Assign task to System Tree groups. Set schedule (immediate or maintenance window).</div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-title">Monitor Progress</div>
+                                    <div class="step-content">Dashboards → Deployment. Monitor success/failure rates.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="standalone">
+                        <div class="card">
+                            <h4>Standalone Installation</h4>
+                            <div class="code-block">
+                                <div class="code-block-header">
+                                    <span class="code-block-title">Command Line Install</span>
+                                </div>
+<pre># Install all modules silently
+setupEP.exe /qn ADDLOCAL=ALL
+
+# Install specific modules
+setupEP.exe /qn ADDLOCAL=tp,fw,wc,atp
+
+# With logging
+setupEP.exe /qn /l*v C:\temp\ens_install.log</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="sccm">
+                        <div class="card">
+                            <h4>SCCM / Intune Deployment</h4>
+                            <ol>
+                                <li>Export ENS package from ePO (includes agent)</li>
+                                <li>Create SCCM Application or Package</li>
+                                <li>Set install command: <code>setupEP.exe /qn ADDLOCAL=ALL</code></li>
+                                <li>Set detection rule: Check for <code>mfetp.exe</code> in Program Files</li>
+                                <li>Deploy to collection</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Phased Rollout Strategy</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Scope</th>
+                                <th>Duration</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pilot</strong></td>
+                                <td>50-100 systems (IT staff)</td>
+                                <td>1-2 weeks</td>
+                                <td>Identify issues, tune policies</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phase 1</strong></td>
+                                <td>500-1000 systems (early adopters)</td>
+                                <td>2-3 weeks</td>
+                                <td>Broader testing, refine exclusions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phase 2</strong></td>
+                                <td>25% of environment</td>
+                                <td>2-3 weeks</td>
+                                <td>Scale testing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phase 3</strong></td>
+                                <td>Remaining systems</td>
+                                <td>2-4 weeks</td>
+                                <td>Full deployment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Post-Deployment Validation</h2>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Validation Commands</span>
+                        <button class="code-block-copy">Copy</button>
+                    </div>
+<pre># Check ENS version
+reg query "HKLM\SOFTWARE\McAfee\Endpoint\Security\Platform" /v Version
+
+# Check services running
+sc query mfetp
+sc query mfefwc
+sc query mfewc
+
+# Check DAT version
+reg query "HKLM\SOFTWARE\McAfee\AVEngine" /v AVDatVersion
+
+# Force policy update
+cmdagent.exe -e
+
+# Test detection (EICAR)
+echo X5O!P%@AP[4\PZX54(P^^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H* > test.txt</pre>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="ens-architecture.html" class="btn btn-ghost">← ENS Architecture</a>
+                <a href="ens-policies.html" class="btn btn-primary">Policy Configuration →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

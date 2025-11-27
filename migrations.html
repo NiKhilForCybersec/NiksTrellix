@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration Guides - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Reference</div>
+            <ul class="sidebar-nav">
+                <li><a href="history.html">Company History</a></li>
+                <li><a href="product-evolution.html">Product Evolution</a></li>
+                <li><a href="migrations.html" class="active">Migration Guides</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <span>Migration Guides</span>
+                </div>
+                <h1>Migration Guides</h1>
+                <p class="hero-subtitle">Step-by-step guides for migrating from legacy and competing products.</p>
+            </div>
+
+            <section>
+                <h2>Common Migration Paths</h2>
+
+                <div class="product-grid">
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <h4 class="card-title">VSE → ENS</h4>
+                        </div>
+                        <p>Migrate from VirusScan Enterprise 8.8 to Endpoint Security 10.7+</p>
+                        <a href="#vse-to-ens" class="btn btn-ghost" style="margin-top: 10px;">View Guide</a>
+                    </div>
+                    
+                    <div class="card dlp">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <h4 class="card-title">Symantec DLP → Trellix</h4>
+                        </div>
+                        <p>Migrate from Symantec DLP to Trellix DLP Endpoint and Network</p>
+                        <a href="#symantec-dlp" class="btn btn-ghost" style="margin-top: 10px;">View Guide</a>
+                    </div>
+                    
+                    <div class="card endpoint">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <h4 class="card-title">Third-Party AV → ENS</h4>
+                        </div>
+                        <p>Replace competing antivirus solutions with Trellix Endpoint Security</p>
+                        <a href="#third-party-av" class="btn btn-ghost" style="margin-top: 10px;">View Guide</a>
+                    </div>
+                    
+                    <div class="card epo">
+                        <div class="card-header">
+                            <div class="card-icon">🔄</div>
+                            <h4 class="card-title">On-Prem → ePO SaaS</h4>
+                        </div>
+                        <p>Move from on-premises ePO to cloud-hosted ePO SaaS</p>
+                        <a href="#epo-saas-migration" class="btn btn-ghost" style="margin-top: 10px;">View Guide</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vse-to-ens">
+                <h2>VSE 8.8 to ENS Migration</h2>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">VSE End of Life</div>
+                        <p>VirusScan Enterprise 8.8 reached end of life in December 2021. Migrate to ENS as soon as possible for continued protection and support.</p>
+                    </div>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Assess Current State</div>
+                        <div class="step-content">
+                            <ul>
+                                <li>Inventory VSE versions deployed</li>
+                                <li>Document custom exclusions and policies</li>
+                                <li>Identify any VSE Access Protection rules</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Prepare ePO</div>
+                        <div class="step-content">
+                            <ul>
+                                <li>Upgrade ePO to 5.10+ if needed</li>
+                                <li>Check in ENS packages</li>
+                                <li>Create ENS policies (can import some VSE settings)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Pilot Deployment</div>
+                        <div class="step-content">
+                            <ul>
+                                <li>Deploy to 50-100 test systems</li>
+                                <li>Monitor for compatibility issues</li>
+                                <li>Validate exclusions work correctly</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Mass Migration</div>
+                        <div class="step-content">
+                            <ul>
+                                <li>Use ePO deployment task (handles VSE removal)</li>
+                                <li>ENS installer auto-uninstalls VSE</li>
+                                <li>Deploy in waves to manage risk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">VSE to ENS Migration Command</span>
+                    </div>
+<pre># ENS installer handles VSE removal automatically
+# No separate uninstall needed
+
+# Via ePO: Product Deployment task
+# Select "Endpoint Security Platform" + modules
+# ENS detects VSE and migrates settings
+
+# Manual (if needed):
+setupEP.exe /qn ADDLOCAL=tp,fw,wc REMOVE_VSE=1</pre>
+                </div>
+            </section>
+
+            <section id="symantec-dlp">
+                <h2>Symantec DLP to Trellix DLP</h2>
+
+                <p>Migration from Symantec DLP to Trellix DLP requires careful planning as policy structures differ between platforms.</p>
+
+                <h3>Component Mapping</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symantec DLP</th>
+                                <th>Trellix DLP</th>
+                                <th>Migration Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Enforce Server</td>
+                                <td>ePO + DLP Extension</td>
+                                <td>Central management moves to ePO</td>
+                            </tr>
+                            <tr>
+                                <td>Detection Server</td>
+                                <td>DLP Discover</td>
+                                <td>Similar scanning capabilities</td>
+                            </tr>
+                            <tr>
+                                <td>Network Prevent</td>
+                                <td>DLP Prevent</td>
+                                <td>MTA/ICAP integration similar</td>
+                            </tr>
+                            <tr>
+                                <td>Endpoint Prevent</td>
+                                <td>DLP Endpoint</td>
+                                <td>Requires McAfee Agent</td>
+                            </tr>
+                            <tr>
+                                <td>IDM (Fingerprinting)</td>
+                                <td>Content Fingerprinting</td>
+                                <td>Re-register documents</td>
+                            </tr>
+                            <tr>
+                                <td>EDM (Database)</td>
+                                <td>Database Fingerprinting</td>
+                                <td>Re-fingerprint databases</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Policy Recreation</div>
+                        <p>Symantec DLP policies cannot be directly imported. Document all policies, classifications, and response rules, then recreate in Trellix. Use the migration as an opportunity to simplify and optimize.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="third-party-av">
+                <h2>Third-Party AV Migration</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Identify Existing AV</div>
+                        <div class="step-content">
+                            <p>Common products: Symantec Endpoint Protection, Trend Micro, Sophos, CrowdStrike, Windows Defender</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Deploy McAfee Agent</div>
+                        <div class="step-content">
+                            <p>Install McAfee Agent first. Can coexist with other AV temporarily.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Uninstall Existing AV</div>
+                        <div class="step-content">
+                            <p>Use vendor removal tools for clean uninstall. Reboot if required.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Deploy ENS</div>
+                        <div class="step-content">
+                            <p>Deploy Trellix ENS via ePO once previous AV is removed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Common AV Removal Tools</span>
+                    </div>
+<pre># Symantec
+CleanWipe.exe (download from Broadcom)
+
+# Trend Micro
+Trend Micro Diagnostic Toolkit
+
+# Sophos
+Sophos Zap removal tool
+
+# Windows Defender (disable, don't remove)
+Set-MpPreference -DisableRealtimeMonitoring $true</pre>
+                </div>
+            </section>
+
+            <section id="epo-saas-migration">
+                <h2>On-Premises to ePO SaaS Migration</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Provision SaaS Tenant</div>
+                        <div class="step-content">Work with Trellix to provision your ePO SaaS tenant.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Export Policies</div>
+                        <div class="step-content">Export policies from on-prem ePO. Some manual recreation may be needed.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Re-Deploy Agents</div>
+                        <div class="step-content">Deploy new agent package pointing to cloud handlers. Cannot migrate existing agents.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Decommission On-Prem</div>
+                        <div class="step-content">Once all agents report to SaaS, decommission on-prem infrastructure.</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="product-evolution.html" class="btn btn-ghost">← Product Evolution</a>
+                <a href="troubleshooting.html" class="btn btn-primary">Troubleshooting →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshoot ePO - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html" class="active">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Troubleshooting</div>
+            <ul class="sidebar-nav">
+                <li><a href="troubleshooting.html">Master Guide</a></li>
+                <li><a href="troubleshoot-epo.html" class="active">ePO Issues</a></li>
+                <li><a href="troubleshoot-endpoint.html">Endpoint Issues</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <a href="troubleshooting.html">Troubleshooting</a><span class="separator">/</span>
+                    <span>ePO Issues</span>
+                </div>
+                <h1>Troubleshoot ePO Issues</h1>
+                <p class="hero-subtitle">Common ePO server problems and resolution steps.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge epo">ePO</span></span>
+                </div>
+            </div>
+
+            <section>
+                <h2>Console Issues</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <button class="accordion-header">
+                            <span>🔴 Console Not Loading / Blank Page</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Symptoms:</h5>
+                            <ul>
+                                <li>Blank white page when accessing console</li>
+                                <li>Browser timeout errors</li>
+                                <li>HTTP 500 errors</li>
+                            </ul>
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Verify ePO services are running:
+                                    <div class="code-block">
+                                        <div class="code-block-header"><span class="code-block-title">Check Services</span></div>
+<pre>Get-Service -Name "McAfee*" | Select Name, Status
+# Key services: McAfee ePolicy Orchestrator Server, McAfee ePolicy Orchestrator Application Server</pre>
+                                    </div>
+                                </li>
+                                <li>Check port availability:
+                                    <div class="code-block">
+                                        <div class="code-block-header"><span class="code-block-title">Port Check</span></div>
+<pre>netstat -an | findstr "8443"
+netstat -an | findstr "443"</pre>
+                                    </div>
+                                </li>
+                                <li>Review server.log for errors:
+                                    <div class="code-block">
+                                        <div class="code-block-header"><span class="code-block-title">Log Location</span></div>
+<pre>C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Server\Logs\server.log</pre>
+                                    </div>
+                                </li>
+                                <li>Clear browser cache and try incognito mode</li>
+                                <li>Restart ePO services if needed</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Login Fails / Authentication Errors</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Verify account not locked in ePO (check orion.log)</li>
+                                <li>If using AD authentication, test AD connectivity</li>
+                                <li>Reset admin password via command line:
+                                    <div class="code-block">
+                                        <div class="code-block-header"><span class="code-block-title">Password Reset</span></div>
+<pre>cd "C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Server\bin"
+resetpass.cmd admin NewPassword123!</pre>
+                                    </div>
+                                </li>
+                                <li>Check certificate validity for SSO/SAML</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Console Slow / Performance Issues</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Check server resource usage (CPU, RAM, disk I/O)</li>
+                                <li>Review database size and performance</li>
+                                <li>Purge old events:
+                                    <div class="code-block">
+                                        <div class="code-block-header"><span class="code-block-title">Event Purge</span></div>
+<pre># Run Server Task: Purge Threat Events
+# Recommended retention: 90 days
+# Check EPOEvents table size in SQL</pre>
+                                    </div>
+                                </li>
+                                <li>Index database tables</li>
+                                <li>Increase Java heap if needed (server.ini)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Database Issues</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Database Connection Failed</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Verify SQL Server is running</li>
+                                <li>Test connectivity from ePO server:
+                                    <div class="code-block">
+                                        <div class="code-block-header"><span class="code-block-title">Test SQL Connection</span></div>
+<pre>sqlcmd -S sqlserver\instance -d ePO_SERVERNAME -U sa -P password
+# If fails, check firewall (TCP 1433)</pre>
+                                    </div>
+                                </li>
+                                <li>Verify database credentials in db.properties</li>
+                                <li>Check SQL Server logs for authentication failures</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Database Full / Disk Space</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Check database and log file sizes</li>
+                                <li>Shrink transaction logs (after backup)</li>
+                                <li>Purge old data (events, client tasks history)</li>
+                                <li>Add disk space or move database files</li>
+                            </ol>
+                            <div class="code-block">
+                                <div class="code-block-header"><span class="code-block-title">Check DB Size</span></div>
+<pre>USE ePO_SERVERNAME;
+EXEC sp_spaceused;
+
+-- Find largest tables
+SELECT TOP 10 
+    t.NAME AS TableName,
+    SUM(a.total_pages) * 8 / 1024 AS TotalSpaceMB
+FROM sys.tables t
+INNER JOIN sys.indexes i ON t.OBJECT_ID = i.object_id
+INNER JOIN sys.partitions p ON i.object_id = p.OBJECT_ID
+INNER JOIN sys.allocation_units a ON p.partition_id = a.container_id
+GROUP BY t.Name
+ORDER BY TotalSpaceMB DESC;</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Repository Issues</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Repository Pull Fails</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Verify internet connectivity from ePO server</li>
+                                <li>Check proxy settings in ePO</li>
+                                <li>Verify Trellix update sites are accessible:
+                                    <ul>
+                                        <li>update.nai.com</li>
+                                        <li>download.mcafee.com</li>
+                                    </ul>
+                                </li>
+                                <li>Check firewall rules (HTTPS outbound)</li>
+                                <li>Review server task log for specific errors</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>🔴 Repository Replication Fails</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <h5>Resolution Steps:</h5>
+                            <ol>
+                                <li>Verify distributed repository credentials</li>
+                                <li>Test network connectivity to repository servers</li>
+                                <li>Check disk space on destination repositories</li>
+                                <li>Verify share permissions (UNC path access)</li>
+                                <li>Review replication task configuration</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Key Log Files</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Log File</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>server.log</code></td>
+                                <td>Main ePO server operations</td>
+                            </tr>
+                            <tr>
+                                <td><code>orion.log</code></td>
+                                <td>Authentication, user sessions</td>
+                            </tr>
+                            <tr>
+                                <td><code>console.log</code></td>
+                                <td>Console/UI issues</td>
+                            </tr>
+                            <tr>
+                                <td><code>tomcat-stdout.log</code></td>
+                                <td>Java/Tomcat errors</td>
+                            </tr>
+                            <tr>
+                                <td><code>server-task.log</code></td>
+                                <td>Scheduled task execution</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-block-title">Log Location</span>
+                    </div>
+<pre>C:\Program Files (x86)\McAfee\ePolicy Orchestrator\Server\Logs\</pre>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="troubleshooting.html" class="btn btn-ghost">← Master Guide</a>
+                <a href="troubleshoot-endpoint.html" class="btn btn-primary">Endpoint Issues →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

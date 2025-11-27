@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Evolution - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Reference</div>
+            <ul class="sidebar-nav">
+                <li><a href="history.html">Company History</a></li>
+                <li><a href="product-evolution.html" class="active">Product Evolution</a></li>
+                <li><a href="migrations.html">Migration Guides</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <span>Product Evolution</span>
+                </div>
+                <h1>Product Naming Evolution</h1>
+                <p class="hero-subtitle">Understanding product name changes from McAfee to Trellix.</p>
+            </div>
+
+            <section>
+                <h2>Product Name Mapping</h2>
+                
+                <p>Following the STG acquisition and merger of McAfee Enterprise and FireEye, products were rebranded under the Trellix name. Use this reference to understand legacy naming.</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Current Name (Trellix)</th>
+                                <th>Previous Names</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Trellix ePO</strong></td>
+                                <td>McAfee ePO, McAfee ePolicy Orchestrator</td>
+                                <td>Core management platform</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix Endpoint Security (ENS)</strong></td>
+                                <td>McAfee ENS, McAfee Endpoint Security</td>
+                                <td>Replaced VirusScan Enterprise</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix EDR</strong></td>
+                                <td>MVISION EDR, McAfee EDR, FireEye HX</td>
+                                <td>Combined products</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix XDR</strong></td>
+                                <td>FireEye Helix, MVISION XDR</td>
+                                <td>XDR platform</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix DLP</strong></td>
+                                <td>McAfee DLP, McAfee Total Protection for DLP</td>
+                                <td>Data protection suite</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix Agent</strong></td>
+                                <td>McAfee Agent, MA</td>
+                                <td>Endpoint communication</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix ATD</strong></td>
+                                <td>McAfee ATD, Advanced Threat Defense</td>
+                                <td>Sandbox analysis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix TIE</strong></td>
+                                <td>McAfee TIE, Threat Intelligence Exchange</td>
+                                <td>Reputation sharing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix ESM</strong></td>
+                                <td>McAfee ESM, Enterprise Security Manager</td>
+                                <td>SIEM platform</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trellix NSP</strong></td>
+                                <td>McAfee NSP, Network Security Platform</td>
+                                <td>IPS appliances</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Endpoint Product Timeline</h2>
+
+                <div class="ascii-diagram">
+<pre>
+ENDPOINT ANTIVIRUS EVOLUTION
+══════════════════════════════════════════════════════════════════════════════
+
+1997          2004           2017           2021          2022          NOW
+  │             │              │              │             │             │
+  ▼             ▼              ▼              ▼             ▼             ▼
+
+┌─────────┐  ┌─────────┐   ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐
+│ McAfee  │  │ McAfee  │   │  McAfee  │  │  McAfee  │  │ Trellix  │  │ Trellix  │
+│VirusScan│─▶│  VSE    │──▶│   ENS    │─▶│ MVISION  │─▶│   ENS    │─▶│Endpoint  │
+│         │  │  8.x    │   │ 10.5-10.7│  │  merged  │  │ rebrand  │  │ Security │
+└─────────┘  └─────────┘   └──────────┘  └──────────┘  └──────────┘  └──────────┘
+    │             │              │              │             │
+    │             │              │              │             │
+  Basic       Enterprise     Modular        Cloud         Trellix
+ scanning     features      platform       features       brand
+
+EOL: 2010     EOL: 2021     Current        Merged        Current
+</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Management Platform Evolution</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Era</th>
+                                <th>Key Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ePO 3.x</td>
+                                <td>2003-2008</td>
+                                <td>Basic central management</td>
+                            </tr>
+                            <tr>
+                                <td>ePO 4.x</td>
+                                <td>2008-2013</td>
+                                <td>Web console, agent handlers</td>
+                            </tr>
+                            <tr>
+                                <td>ePO 5.x</td>
+                                <td>2013-2020</td>
+                                <td>Modern UI, REST API, dashboards</td>
+                            </tr>
+                            <tr>
+                                <td>ePO 5.10</td>
+                                <td>2020-Present</td>
+                                <td>Current on-prem version</td>
+                            </tr>
+                            <tr>
+                                <td>MVISION ePO</td>
+                                <td>2019-2022</td>
+                                <td>Cloud-hosted, renamed to ePO SaaS</td>
+                            </tr>
+                            <tr>
+                                <td>Trellix ePO</td>
+                                <td>2022-Present</td>
+                                <td>Current branding (on-prem + SaaS)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Legacy Products (EOL)</h2>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">End of Life Products</div>
+                        <p>These products are no longer supported and should be migrated:</p>
+                        <ul>
+                            <li><strong>VirusScan Enterprise (VSE) 8.8</strong> — EOL December 2021</li>
+                            <li><strong>Host IPS (HIPS)</strong> — EOL December 2021</li>
+                            <li><strong>SiteAdvisor Enterprise</strong> — Replaced by Web Control</li>
+                            <li><strong>McAfee Agent 5.0.x</strong> — Upgrade to 5.7+</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="history.html" class="btn btn-ghost">← Company History</a>
+                <a href="migrations.html" class="btn btn-primary">Migration Guides →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

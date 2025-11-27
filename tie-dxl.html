@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIE & DXL - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b35"/><stop offset="100%" style="stop-color:#ff8c42"/></linearGradient></defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search"><input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation"></div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Advanced Topics</div>
+            <ul class="sidebar-nav">
+                <li><a href="tie-dxl.html" class="active">TIE & DXL</a></li>
+                <li><a href="atd-sandbox.html">ATD Sandbox</a></li>
+                <li><a href="integrations.html">Integrations</a></li>
+                <li><a href="api-automation.html">API & Automation</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a><span class="separator">/</span>
+                    <span>TIE & DXL</span>
+                </div>
+                <h1>Threat Intelligence Exchange & DXL</h1>
+                <p class="hero-subtitle">Real-time threat intelligence sharing and security fabric communication layer.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge">Advanced</span></span>
+                    <span class="page-meta-item">📖 15 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>What is TIE?</h2>
+                <p>
+                    <strong>Threat Intelligence Exchange (TIE)</strong> enables real-time sharing of file and certificate 
+                    reputation data across your security ecosystem. When one endpoint encounters a threat, all endpoints 
+                    learn about it instantly.
+                </p>
+
+                <div class="ascii-diagram">
+<pre>
+TIE ARCHITECTURE
+══════════════════════════════════════════════════════════════════════════════
+
+                         ┌─────────────────────────┐
+                         │      TIE SERVER         │
+                         │                         │
+                         │  • Reputation Database  │
+                         │  • File Hashes          │
+                         │  • Certificates         │
+                         │  • Custom Reputations   │
+                         └───────────┬─────────────┘
+                                     │
+                              DXL FABRIC
+         ┌───────────────────────────┼───────────────────────────┐
+         │                           │                           │
+         ▼                           ▼                           ▼
+┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
+│   ENS + TIE     │       │   ATD Sandbox   │       │   Web Gateway   │
+│   Module        │       │                 │       │                 │
+│                 │  ───► │  Analyzes file  │ ───►  │  Uses TIE       │
+│  Queries TIE    │       │  Updates TIE    │       │  reputation     │
+│  before execute │       │  with verdict   │       │                 │
+└─────────────────┘       └─────────────────┘       └─────────────────┘
+</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>DXL (Data Exchange Layer)</h2>
+                <p>
+                    <strong>DXL</strong> is the messaging fabric that enables real-time communication between security 
+                    products. Think of it as a pub/sub system for security events.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Pub/Sub Messaging</strong></td><td>Products publish and subscribe to security events</td></tr>
+                            <tr><td><strong>Service Invocation</strong></td><td>Request/response for reputation queries</td></tr>
+                            <tr><td><strong>Scalable Fabric</strong></td><td>Multiple brokers for high availability</td></tr>
+                            <tr><td><strong>Open SDK</strong></td><td>Python, Java, JavaScript clients available</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>TIE Reputation Flow</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">File Encountered</div>
+                        <div class="step-content">Endpoint encounters unknown file. ENS calculates hash.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">TIE Query</div>
+                        <div class="step-content">ENS queries TIE server via DXL for file reputation.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Reputation Check</div>
+                        <div class="step-content">TIE checks local DB, GTI, and any custom reputations.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Action Taken</div>
+                        <div class="step-content">Based on reputation: Allow, Block, or send to ATD for analysis.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Custom Reputation</h2>
+                <div class="code-block">
+                    <div class="code-block-header"><span class="code-block-title">Setting File Reputation via API</span></div>
+<pre># Python DXL example
+from dxlclient.client import DxlClient
+from dxltieclient import TieClient
+
+with DxlClient(config) as client:
+    tie_client = TieClient(client)
+    
+    # Set file as known malicious
+    tie_client.set_file_reputation(
+        TrustLevel.KNOWN_MALICIOUS,
+        {"md5": "abc123...", "sha1": "def456...", "sha256": "ghi789..."},
+        filename="malware.exe",
+        comment="Confirmed malware by SOC"
+    )</pre>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="esm-siem.html" class="btn btn-ghost">← ESM SIEM</a>
+                <a href="atd-sandbox.html" class="btn btn-primary">ATD Sandbox →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>

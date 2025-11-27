@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDR Detection & Response - Trellix Documentation</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4L4 12v16l16 8 16-8V12L20 4z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+                <path d="M20 12l-8 4v8l8 4 8-4v-8l-8-4z" fill="url(#grad1)"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35"/>
+                        <stop offset="100%" style="stop-color:#ff8c42"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="header-logo-text">Trellix Docs</span>
+        </div>
+        <nav class="header-nav">
+            <a href="../index.html">Home</a>
+            <a href="epo-fundamentals.html">ePO</a>
+            <a href="endpoint-security.html">Endpoint</a>
+            <a href="edr-fundamentals.html" class="active">EDR</a>
+            <a href="dlp-architecture.html">DLP</a>
+            <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" placeholder="Search docs... (Ctrl+K)" aria-label="Search documentation">
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">EDR / XDR</div>
+            <ul class="sidebar-nav">
+                <li><a href="edr-fundamentals.html" data-category="endpoint">EDR Fundamentals</a></li>
+                <li><a href="edr-architecture.html" data-category="endpoint">EDR Architecture</a></li>
+                <li><a href="edr-detection.html" data-category="endpoint" class="active">Detection & Response</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div class="page-breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="edr-fundamentals.html">EDR</a>
+                    <span class="separator">/</span>
+                    <span>Detection & Response</span>
+                </div>
+                <h1>Detection & Response Operations</h1>
+                <p class="hero-subtitle">Alert triage, investigation workflows, and response actions in Trellix EDR.</p>
+                <div class="page-meta">
+                    <span class="page-meta-item"><span class="badge endpoint">EDR</span></span>
+                    <span class="page-meta-item">📖 20 min read</span>
+                </div>
+            </div>
+
+            <section>
+                <h2>Alert Triage Workflow</h2>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Initial Assessment</div>
+                        <div class="step-content">Review alert severity, affected systems, and detection type. Check if related alerts exist.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Context Gathering</div>
+                        <div class="step-content">Examine process tree, file details, network connections. Determine scope of activity.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Verdict Decision</div>
+                        <div class="step-content">True Positive → Escalate to incident. False Positive → Document and tune detection.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Response Action</div>
+                        <div class="step-content">Contain threat if confirmed. Isolate host, kill process, collect evidence.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Investigation Tools</h2>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="timeline">Timeline View</button>
+                        <button class="tab-button" data-tab="process-tree">Process Tree</button>
+                        <button class="tab-button" data-tab="search">Telemetry Search</button>
+                    </div>
+
+                    <div class="tab-panel active" id="timeline">
+                        <div class="card">
+                            <h4>Timeline Analysis</h4>
+                            <p>Chronological view of all events on a system. Use to:</p>
+                            <ul>
+                                <li>Identify initial compromise vector</li>
+                                <li>Track lateral movement</li>
+                                <li>Document attacker activity sequence</li>
+                                <li>Establish timeline for incident report</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="process-tree">
+                        <div class="card">
+                            <h4>Process Tree</h4>
+                            <p>Visual parent-child process relationships. Reveals:</p>
+                            <ul>
+                                <li>Suspicious process spawning (e.g., Word spawning PowerShell)</li>
+                                <li>Injection targets</li>
+                                <li>Persistence mechanisms</li>
+                                <li>Complete attack chain</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="search">
+                        <div class="card">
+                            <h4>Telemetry Search</h4>
+                            <p>Query raw telemetry across all endpoints:</p>
+                            <div class="code-block">
+                                <div class="code-block-header">
+                                    <span class="code-block-title">Example Queries</span>
+                                </div>
+<pre># Find PowerShell with encoded commands
+process_name:powershell.exe AND command_line:*-enc*
+
+# Find LSASS access
+target_process:lsass.exe AND event_type:process_access
+
+# Find scheduled task creation
+event_type:registry_write AND registry_path:*TaskCache*
+
+# Find outbound connections to suspicious ports
+event_type:network_connection AND dest_port:(4444 OR 5555 OR 8080)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Response Actions</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Impact</th>
+                                <th>Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Network Isolate</strong></td>
+                                <td>High - blocks all traffic</td>
+                                <td>Active breach containment</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kill Process</strong></td>
+                                <td>Medium - terminates process</td>
+                                <td>Stop malicious execution</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quarantine File</strong></td>
+                                <td>Low - moves file</td>
+                                <td>Remove malware from disk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Collect File</strong></td>
+                                <td>None - forensic only</td>
+                                <td>Retrieve samples for analysis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Memory Dump</strong></td>
+                                <td>None - forensic only</td>
+                                <td>Capture process memory</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Remote Shell</strong></td>
+                                <td>Variable</td>
+                                <td>Manual investigation/remediation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Network Isolation</div>
+                        <p>Network isolation is highly disruptive. Have a release plan ready. The isolated host can still communicate with EDR cloud for commands.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Automated Response Playbooks</h2>
+
+                <div class="card endpoint">
+                    <h4>Example: Ransomware Response</h4>
+                    <ol>
+                        <li><strong>Trigger:</strong> Ransomware detection with high confidence</li>
+                        <li><strong>Auto-Action:</strong> Network isolate affected host</li>
+                        <li><strong>Auto-Action:</strong> Kill suspicious process</li>
+                        <li><strong>Notification:</strong> Alert SOC and IT</li>
+                        <li><strong>Manual Step:</strong> Analyst reviews and determines scope</li>
+                        <li><strong>Manual Step:</strong> Remediate and restore</li>
+                    </ol>
+                </div>
+            </section>
+
+            <div class="flex justify-between mt-4" style="padding-top: var(--spacing-xl); border-top: 1px solid var(--border-primary);">
+                <a href="edr-architecture.html" class="btn btn-ghost">← EDR Architecture</a>
+                <a href="dlp-architecture.html" class="btn btn-primary">DLP Architecture →</a>
+            </div>
+        </div>
+    </main>
+    <script src="../js/main.js"></script>
+</body>
+</html>
